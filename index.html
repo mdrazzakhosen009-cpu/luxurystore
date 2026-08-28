@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXORA | Luxury Fashion Store & Admin Panel</title>
+    <!-- Tailwind CSS CDN for Modern Luxury UI/UX Design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            dark: '#111111',
+                            gold: '#C5A880',
+                            lightgold: '#E5D4BC',
+                            gray: '#222222',
+                            lightgray: '#F9F9F9'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        /* Smooth hiding/showing for views */
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-luxury-lightgray text-luxury-dark antialiased selection:bg-luxury-gold selection:text-white">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-luxury-dark text-luxury-lightgold text-xs py-2 px-4 text-center tracking-widest uppercase">
+        Complimentary Express Shipping on Orders Over $100 | Secure COD, bKash, Nagad & Rocket Available
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('store-view')">
+                <span class="font-serif text-2xl tracking-[0.25em] font-bold text-luxury-dark">LUXORA</span>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wider uppercase text-luxury-dark">
+                <a href="#" onclick="switchView('store-view')" class="hover:text-luxury-gold transition">Home</a>
+                <a href="#shop" onclick="switchView('store-view'); scrollToSection('shop-section');" class="hover:text-luxury-gold transition">Shop</a>
+                <a href="#collection" onclick="switchView('store-view'); scrollToSection('collection-section');" class="hover:text-luxury-gold transition">Collection</a>
+                <a href="#" onclick="openAuthModal('login')" class="hover:text-luxury-gold transition">Login / Register</a>
+                <a href="#" onclick="openAdminCheck()" class="text-luxury-gold font-semibold hover:underline">Admin Panel</a>
+            </nav>
+
+            <!-- Action Icons -->
+            <div class="flex items-center space-x-5 text-lg">
+                <button onclick="openAuthModal('login')" class="hover:text-luxury-gold transition" title="User Account"><i class="fa-regular fa-user"></i></button>
+                <button onclick="toggleCart()" class="relative hover:text-luxury-gold transition" title="Shopping Cart">
+                    <i class="fa-bag-shopping fa-regular"></i>
+                    <span id="cart-badge" class="absolute -top-2 -right-2 bg-luxury-gold text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-xl"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-4 space-y-3">
+        <a href="#" onclick="switchView('store-view'); toggleMobileMenu();" class="block text-sm font-medium uppercase">Home</a>
+        <a href="#" onclick="switchView('store-view'); toggleMobileMenu(); scrollToSection('shop-section');" class="block text-sm font-medium uppercase">Shop</a>
+        <a href="#" onclick="openAuthModal('login'); toggleMobileMenu();" class="block text-sm font-medium uppercase">Login / Register</a>
+        <a href="#" onclick="openAdminCheck(); toggleMobileMenu();" class="block text-sm font-medium uppercase text-luxury-gold">Admin Panel</a>
+    </div>
+
+    <!-- ==================== VIEW 1: STOREFRONT & SHOP ==================== -->
+    <div id="store-view" class="view-section active">
+        <!-- HERO SECTION -->
+        <section class="relative bg-luxury-dark text-white overflow-hidden">
+            <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1920');"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48 flex flex-col items-start justify-center">
+                <span class="text-xs uppercase tracking-[0.3em] text-luxury-lightgold mb-4 font-semibold">New Collection 2026</span>
+                <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-light tracking-wide max-w-2xl leading-tight mb-8">
+                    Fashion As Unique As You Are
+                </h1>
+                <button onclick="scrollToSection('shop-section')" class="bg-white text-luxury-dark px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-luxury-gold hover:text-white transition duration-300">
+                    Discover Collection
+                </button>
+            </div>
+        </section>
+
+        <!-- VALUE PROPS -->
+        <section class="bg-white border-b border-gray-100 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="flex flex-col items-center"><i class="fa-solid fa-truck-fast text-luxury-gold text-xl mb-2"></i><h4 class="text-xs font-bold uppercase tracking-wider">Free Shipping</h4><p class="text-[11px] text-gray-500">On all orders over $100</p></div>
+                <div class="flex flex-col items-center"><i class="fa-solid fa-rotate-left text-luxury-gold text-xl mb-2"></i><h4 class="text-xs font-bold uppercase tracking-wider">Easy Returns</h4><p class="text-[11px] text-gray-500">30-day return policy</p></div>
+                <div class="flex flex-col items-center"><i class="fa-solid fa-shield-halved text-luxury-gold text-xl mb-2"></i><h4 class="text-xs font-bold uppercase tracking-wider">Secure Payment</h4><p class="text-[11px] text-gray-500">100% secure checkout</p></div>
+                <div class="flex flex-col items-center"><i class="fa-solid fa-headset text-luxury-gold text-xl mb-2"></i><h4 class="text-xs font-bold uppercase tracking-wider">24/7 Support</h4><p class="text-[11px] text-gray-500">Dedicated assistance</p></div>
+            </div>
+        </section>
+
+        <!-- DYNAMIC SHOP SECTION -->
+        <section id="shop-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-luxury-gold font-semibold">Curated Catalog</span>
+                <h2 class="font-serif text-3xl md:text-4xl mt-2">Explore Our Luxury Collection</h2>
+            </div>
+
+            <!-- Categories Filter -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="filterProducts('All')" class="category-btn px-6 py-2 text-xs uppercase tracking-widest bg-luxury-dark text-white transition">All Products</button>
+                <button onclick="filterProducts('Evening Wear')" class="category-btn px-6 py-2 text-xs uppercase tracking-widest bg-white border border-gray-300 text-luxury-dark hover:border-luxury-gold transition">Evening Wear</button>
+                <button onclick="filterProducts('Casual Wear')" class="category-btn px-6 py-2 text-xs uppercase tracking-widest bg-white border border-gray-300 text-luxury-dark hover:border-luxury-gold transition">Casual Wear</button>
+                <button onclick="filterProducts('Outerwear')" class="category-btn px-6 py-2 text-xs uppercase tracking-widest bg-white border border-gray-300 text-luxury-dark hover:border-luxury-gold transition">Outerwear</button>
+                <button onclick="filterProducts('Accessories')" class="category-btn px-6 py-2 text-xs uppercase tracking-widest bg-white border border-gray-300 text-luxury-dark hover:border-luxury-gold transition">Accessories</button>
+            </div>
+
+            <!-- Products Grid Rendered via JavaScript -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Products loaded dynamically from LocalStorage state -->
+            </div>
+        </section>
+    </div>
+
+    <!-- ==================== VIEW 2: SECURE ADMIN PANEL (/admin) ==================== -->
+    <div id="admin-view" class="view-section bg-gray-100 min-h-screen">
+        <!-- Admin Login Screen -->
+        <div id="admin-login-screen" class="max-w-md mx-auto pt-32 px-4">
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="font-serif text-2xl font-bold mb-2 text-center">Admin Portal</h2>
+                <p class="text-xs text-gray-500 text-center mb-6">Enter credentials to access management dashboard</p>
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Admin Email / ID</label>
+                        <input type="text" id="admin-email-input" required class="w-full px-4 py-3 border border-gray-300 text-sm focus:outline-none focus:border-luxury-gold" placeholder="admin@luxora.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Password</label>
+                        <input type="password" id="admin-pass-input" required class="w-full px-4 py-3 border border-gray-300 text-sm focus:outline-none focus:border-luxury-gold" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full bg-luxury-dark text-white py-3 text-xs font-semibold uppercase tracking-widest hover:bg-luxury-gold transition">Login Dashboard</button>
+                    <div class="text-right mt-2">
+                        <button type="button" onclick="openForgotPassModal()" class="text-xs text-luxury-gold hover:underline">Forgot Password?</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard Content -->
+        <div id="admin-dashboard" class="hidden flex">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-luxury-dark text-white min-h-screen p-6 hidden md:block">
+                <h3 class="font-serif text-lg tracking-widest font-bold mb-8 text-luxury-lightgold">LUXORA ADMIN</h3>
+                <nav class="space-y-4 text-xs font-semibold tracking-wider uppercase">
+                    <a href="#" onclick="switchAdminTab('products')" class="admin-nav-link block py-3 px-4 bg-luxury-gold text-white transition">Products Management</a>
+                    <a href="#" onclick="switchAdminTab('agents')" class="admin-nav-link block py-3 px-4 hover:bg-luxury-gray text-gray-300 transition">Agent Chat Management</a>
+                    <a href="#" onclick="switchAdminTab('users')" class="admin-nav-link block py-3 px-4 hover:bg-luxury-gray text-gray-300 transition">Registered Users & Orders</a>
+                    <a href="#" onclick="switchAdminTab('settings')" class="admin-nav-link block py-3 px-4 hover:bg-luxury-gray text-gray-300 transition">Security & Settings</a>
+                    <a href="#" onclick="logoutAdmin()" class="block py-3 px-4 text-red-400 hover:bg-luxury-gray transition mt-12">Logout</a>
+                </nav>
+            </aside>
+
+            <!-- Main Dashboard Panel -->
+            <main class="flex-1 p-6 md:p-10">
+                <div class="flex justify-between items-center mb-8 border-b border-gray-200 pb-4">
+                    <h1 class="font-serif text-2xl font-bold" id="admin-section-title">Manage Store Products</h1>
+                    <button onclick="switchView('store-view')" class="text-xs bg-luxury-dark text-white px-4 py-2 uppercase tracking-wider">Back to Store</button>
+                </div>
+
+                <!-- TAB 1: PRODUCTS MANAGEMENT -->
+                <div id="admin-tab-products" class="admin-tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
+                        <h3 class="font-serif text-lg font-bold mb-4">Add New Luxury Product</h3>
+                        <form onsubmit="handleAddNewProduct(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Product Title</label>
+                                <input type="text" id="new-prod-name" required class="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-luxury-gold" placeholder="Velvet Evening Gown">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Category</label>
+                                <select id="new-prod-category" class="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-luxury-gold">
+                                    <option value="Evening Wear">Evening Wear</option>
+                                    <option value="Casual Wear">Casual Wear</option>
+                                    <option value="Outerwear">Outerwear</option>
+                                    <option value="Accessories">Accessories</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Price ($)</label>
+                                <input type="number" step="0.01" id="new-prod-price" required class="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-luxury-gold" placeholder="189.99">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Image URL</label>
+                                <input type="url" id="new-prod-img" required class="w-full px-3 py-2 border border-gray-300 text-sm focus:outline-none focus:border-luxury-gold" placeholder="https://images.unsplash.com/...">
+                            </div>
+                            <div class="md:col-span-2">
+                                <button type="submit" class="bg-luxury-gold text-white px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-luxury-dark transition">Save Product Permanently</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Products Table -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-600">
+                                    <th class="p-4">Image</th>
+                                    <th class="p-4">Title</th>
+                                    <th class="p-4">Category</th>
+                                    <th class="p-4">Price</th>
+                                    <th class="p-4">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-product-table-body" class="text-sm divide-y divide-gray-100">
+                                <!-- Loaded via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 2: AGENT MANAGEMENT -->
+                <div id="admin-tab-agents" class="admin-tab-content hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-8">
+                        <h3 class="font-serif text-lg font-bold mb-4">Add Customer Service Agent (WhatsApp)</h3>
+                        <form onsubmit="handleAddNewAgent(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Agent Name</label>
+                                <input type="text" id="agent-name" required class="w-full px-3 py-2 border border-gray-300 text-sm" placeholder="Sarah Khan">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">WhatsApp Phone Number (with Country Code)</label>
+                                <input type="text" id="agent-phone" required class="w-full px-3 py-2 border border-gray-300 text-sm" placeholder="8801700000000">
+                            </div>
+                            <div class="flex items-end">
+                                <button type="submit" class="w-full bg-luxury-gold text-white py-2 text-xs uppercase tracking-widest font-semibold hover:bg-luxury-dark transition">Add Agent</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="font-serif text-lg font-bold mb-4">Active Support Agents</h3>
+                        <div id="admin-agents-list" class="space-y-3">
+                            <!-- Loaded via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: USERS & ORDERS -->
+                <div id="admin-tab-users" class="admin-tab-content hidden">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+                        <h3 class="font-serif text-lg font-bold mb-4">Registered Customers & Social Logins</h3>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-600">
+                                    <th class="p-3">Name</th>
+                                    <th class="p-3">Email / ID</th>
+                                    <th class="p-3">Provider</th>
+                                    <th class="p-3">Registered Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-table" class="text-sm divide-y divide-gray-100">
+                                <!-- Loaded via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="font-serif text-lg font-bold mb-4
