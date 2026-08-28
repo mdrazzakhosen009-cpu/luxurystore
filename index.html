@@ -3,54 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Luxury Store | Premium E-Commerce</title>
+    <title>FM Fashion Studio</title>
     <style>
         :root {
-            --bg-main: #0b0c10;
-            --bg-card: #1f2833;
-            --accent: #66fcf1;
-            --accent-dark: #45a29e;
-            --text-main: #ffffff;
-            --text-muted: #c5c6c7;
-            --border: #2c353d;
-            --danger: #ff4c4c;
+            --bg-main: #fcf9f5;
+            --bg-card: #ffffff;
+            --bg-dark: #2c221e;
+            --accent: #b87333;
+            --accent-hover: #995c25;
+            --text-main: #2c221e;
+            --text-muted: #736b65;
+            --border: #e6dfd5;
+            --danger: #b33a3a;
+            --success: #3a7a40;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-main); color: var(--text-main); padding-bottom: 80px; }
 
+        /* Storefront Header */
         header {
             background-color: var(--bg-card);
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border);
             position: sticky; top: 0; z-index: 100;
         }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { width: 35px; height: 35px; background: var(--bg-dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .logo-text { font-size: 1.2rem; font-weight: bold; letter-spacing: 1px; color: var(--text-main); }
+        .nav-link-btn { background: transparent; border: none; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; font-weight: 600; text-decoration: underline; }
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); letter-spacing: 1px; }
-        
-        .nav-btns button {
-            background: transparent; color: var(--text-main); border: 1px solid var(--accent);
-            padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-left: 10px; font-weight: bold;
-            transition: 0.3s;
-        }
-        .nav-btns button:hover { background: var(--accent); color: #000; }
-
+        /* Hero */
         .hero {
-            background: linear-gradient(rgba(11,12,16,0.8), rgba(11,12,16,0.8)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200') center/cover;
-            padding: 4rem 2rem; text-align: center; border-bottom: 1px solid var(--border);
+            background: linear-gradient(rgba(44,34,30,0.85), rgba(44,34,30,0.85)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200') center/cover;
+            padding: 4rem 2rem; color: #fff; border-bottom: 1px solid var(--border);
         }
-        .hero h1 { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
-        .hero p { color: var(--text-muted); font-size: 1.1rem; }
+        .hero-content { max-width: 1200px; margin: 0 auto; }
+        .hero-sub { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-family: Georgia, serif; font-weight: normal; }
+        .hero p { color: #dcd6cd; font-size: 1rem; max-width: 600px; margin-bottom: 1.5rem; line-height: 1.6; }
 
-        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+
+        /* Promise Section */
+        .promise-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
+        .promise-box h2 { font-size: 1.6rem; font-family: Georgia, serif; margin-bottom: 0.8rem; font-weight: normal; }
+        .promise-box p { color: var(--text-muted); margin-bottom: 1.5rem; }
+        .promise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .promise-item { border-left: 2px solid var(--accent); padding-left: 1rem; }
+        .promise-item span { color: var(--accent); font-weight: bold; font-size: 0.9rem; display: block; margin-bottom: 0.3rem; }
+        .promise-item h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .promise-item p { font-size: 0.8rem; color: var(--text-muted); }
 
         /* Category Filter */
-        .filter-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
-        .filter-btn { background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border); padding: 0.5rem 1.2rem; border-radius: 20px; cursor: pointer; }
-        .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); font-weight: bold; }
+        .filter-bar { display: flex; gap: 10px; margin-bottom: 2rem; overflow-x: auto; padding-bottom: 5px; }
+        .filter-btn { background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border); padding: 0.6rem 1.5rem; border-radius: 20px; cursor: pointer; white-space: nowrap; font-weight: 500; }
+        .filter-btn.active, .filter-btn:hover { background: var(--bg-dark); color: #fff; border-color: var(--bg-dark); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
 
@@ -58,352 +69,278 @@
             background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
             overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-body { padding: 1rem; }
-        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        .card .price { color: var(--accent); font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        .card img { width: 100%; height: 260px; object-fit: cover; }
+        .card-body { padding: 1.2rem; }
+        .card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; font-weight: 600; }
+        .card .cat-tag { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; display: block; }
+        .card .price { color: var(--text-main); font-size: 1.1rem; font-weight: bold; margin-bottom: 1rem; }
 
         .btn {
-            background-color: var(--accent); color: #000; border: none; padding: 0.7rem 1rem;
-            font-weight: bold; cursor: pointer; width: 100%; text-align: center; border-radius: 4px; transition: 0.3s;
+            background-color: var(--bg-dark); color: #fff; border: none; padding: 0.7rem 1rem;
+            font-weight: 600; cursor: pointer; width: 100%; text-align: center; border-radius: 4px; transition: 0.3s;
         }
-        .btn:hover { background-color: var(--accent-dark); }
-        .btn-danger { background-color: var(--danger); color: #fff; margin-top: 5px; }
+        .btn:hover { background-color: var(--accent); }
+        .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
+        .btn-outline:hover { background: var(--border); color: var(--text-main); }
+        .btn-danger { background-color: var(--danger); }
+
+        /* Admin Studio Layout */
+        .admin-studio { display: none; background: var(--bg-main); min-height: 100vh; padding-top: 0; }
+        .admin-header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .admin-tabs { display: flex; gap: 1.5rem; background: var(--bg-card); padding: 0 2rem; border-bottom: 1px solid var(--border); overflow-x: auto; }
+        .admin-tab { padding: 1rem 0; cursor: pointer; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; border-bottom: 2px solid transparent; white-space: nowrap; }
+        .admin-tab.active { color: var(--text-main); border-bottom-color: var(--accent); }
+
+        .admin-content { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; }
+        .stat-card h4 { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; }
+        .stat-card .val { font-size: 1.8rem; font-weight: bold; color: var(--text-main); }
+
+        /* Tables & Forms */
+        table { width: 100%; border-collapse: collapse; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        th { background: #f4efe6; color: var(--text-main); font-weight: 600; }
+        
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
+        .form-group input, .form-group select { width: 100%; padding: 0.8rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); border-radius: 4px; }
+        .checkbox-label { display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 0.8rem; background: var(--bg-card); padding: 1rem; border: 1px solid var(--border); border-radius: 6px; }
 
         /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 200; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 200; }
         .modal-content { background: var(--bg-card); padding: 2rem; border-radius: 8px; width: 90%; max-width: 450px; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
-        .modal-content h2 { margin-bottom: 1rem; color: var(--accent); }
+        .modal-content h2 { margin-bottom: 1.2rem; font-family: Georgia, serif; font-weight: normal; }
 
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); }
-        .form-group input, .form-group select { width: 100%; padding: 0.7rem; background: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); border-radius: 4px; }
-
-        /* Admin Panel Area */
-        .admin-section { display: none; background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); margin-top: 3rem; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
-        table, th, td { border: 1px solid var(--border); }
-        th, td { padding: 0.75rem; text-align: left; }
-        th { background: var(--bg-main); color: var(--accent); }
-
-        /* Chatbot */
+        /* Floating Chat */
         .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 300; }
-        .chat-btn { width: 55px; height: 55px; border-radius: 50%; background: var(--accent); border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .chat-box { display: none; position: absolute; bottom: 70px; right: 0; width: 320px; height: 400px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; flex-direction: column; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .chat-header { background: var(--bg-main); padding: 0.8rem; font-weight: bold; border-bottom: 1px solid var(--border); color: var(--accent); display: flex; justify-content: space-between; }
-        .chat-messages { flex: 1; padding: 0.8rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; }
-        .msg { padding: 0.6rem; border-radius: 6px; font-size: 0.85rem; max-width: 80%; }
-        .msg.bot { background: var(--border); align-self: flex-start; }
-        .msg.user { background: var(--accent); color: #000; align-self: flex-end; font-weight: bold; }
+        .chat-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--bg-dark); color: #fff; border: none; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; }
+        .chat-box { display: none; position: absolute; bottom: 65px; right: 0; width: 320px; height: 380px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; flex-direction: column; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .chat-header { background: var(--bg-dark); color: #fff; padding: 0.8rem; font-weight: 600; display: flex; justify-content: space-between; border-radius: 8px 8px 0 0; }
+        .chat-messages { flex: 1; padding: 0.8rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem; }
+        .msg { padding: 0.6rem; border-radius: 6px; max-width: 80%; }
+        .msg.bot { background: #f4efe6; align-self: flex-start; }
+        .msg.user { background: var(--bg-dark); color: #fff; align-self: flex-end; }
         .chat-input { display: flex; border-top: 1px solid var(--border); }
-        .chat-input input { flex: 1; padding: 0.7rem; background: transparent; border: none; color: var(--text-main); outline: none; }
-        .chat-input button { padding: 0.7rem 1.2rem; background: var(--accent); border: none; cursor: pointer; font-weight: bold; }
+        .chat-input input { flex: 1; padding: 0.7rem; background: transparent; border: none; outline: none; }
+        .chat-input button { padding: 0.7rem 1.2rem; background: var(--bg-dark); color: #fff; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">AURA LUXURY</div>
-        <div class="nav-btns">
-            <button onclick="toggleAdminView()">Admin Panel</button>
-        </div>
-    </header>
-
-    <div class="hero">
-        <h1>Exclusive Luxury Collection</h1>
-        <p>Discover premium lifestyle products crafted for elegance.</p>
-    </div>
-
-    <div class="container">
-        <!-- Category Filter -->
-        <div class="filter-bar">
-            <button class="filter-btn active" onclick="filterCategory('All', this)">All Items</button>
-            <button class="filter-btn" onclick="filterCategory('Watch', this)">Watches</button>
-            <button class="filter-btn" onclick="filterCategory('Gadget', this)">Gadgets</button>
-        </div>
-
-        <div class="grid" id="productGrid"></div>
-
-        <!-- Admin Control Panel (Hidden by default) -->
-        <div class="admin-section" id="adminPanel">
-            <h2>⚙️ Admin Control Center</h2>
-            <br>
-            <h3>Upload New Product</h3>
-            <div class="form-group"><input type="text" id="pName" placeholder="Product Name"></div>
-            <div class="form-group">
-                <select id="pCat">
-                    <option value="Watch">Watch</option>
-                    <option value="Gadget">Gadget</option>
-                </select>
+    <!-- STOREFRONT VIEW -->
+    <div id="storefrontView">
+        <header>
+            <div class="logo-area">
+                <div class="logo-icon">FM</div>
+                <div class="logo-text" id="storeTitleDisplay">FM FASHION</div>
             </div>
-            <div class="form-group"><input type="number" id="pPrice" placeholder="Price in BDT"></div>
-            <div class="form-group"><input type="text" id="pImg" placeholder="Image URL (Unsplash or direct link)"></div>
-            <button class="btn" onclick="addProduct()">Upload Product</button>
-            
-            <br><hr style="border-color:var(--border); margin: 2rem 0;"><br>
-            <h3>Customer Orders List</h3>
-            <table id="orderTable">
-                <thead>
-                    <tr>
-                        <th>Customer</th>
-                        <th>Phone</th>
-                        <th>Method</th>
-                        <th>TrxID / Number</th>
-                        <th>Product</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+            <button class="nav-link-btn" onclick="openAdminStudio()">Admin studio</button>
+        </header>
+
+        <div class="hero">
+            <div class="hero-content">
+                <div class="hero-sub">New Season / २०२৮</div>
+                <h1 id="heroTitle">Everyday, made memorable.</h1>
+                <p id="heroDesc">Premium pieces for the rhythm of your real life. Designed in Bangladesh, made to stay with you.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="promise-box">
+                <h2>The FM Promise</h2>
+                <h3 style="font-size: 1.2rem; font-weight: normal; margin-bottom: 0.5rem;">Good clothes should make the day feel easier.</h3>
+                <p>We choose breathable fabrics, honest silhouettes and small details you notice after the first wear.</p>
+                <div class="promise-grid">
+                    <div class="promise-item">
+                        <span id="delDays">2–3</span>
+                        <h4>days to Dhaka</h4>
+                        <p>Fast and reliable dispatch.</p>
+                    </div>
+                    <div class="promise-item">
+                        <span>৳0</span>
+                        <h4>style advice</h4>
+                        <p>Complimentary curation help.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-bar" id="filterBar">
+                <button class="filter-btn active" onclick="filterCategory('All', this)">All</button>
+                <button class="filter-btn" onclick="filterCategory('Women', this)">Women - নারী</button>
+                <button class="filter-btn" onclick="filterCategory('Men', this)">Men - পুরুষ</button>
+                <button class="filter-btn" onclick="filterCategory('Accessories', this)">Accessories - অনুসঙ্গ</button>
+            </div>
+
+            <div class="grid" id="productGrid"></div>
         </div>
     </div>
 
+    <!-- ADMIN STUDIO (CONTROL CENTER) -->
+    <div id="adminStudio" class="admin-studio">
+        <div class="admin-header">
+            <div class="logo-area">
+                <div class="logo-icon">FM</div>
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Store Control Center</div>
+                    <div class="logo-text">Studio Admin</div>
+                </div>
+            </div>
+            <button class="btn btn-outline" style="width: auto; padding: 0.5rem 1rem;" onclick="closeAdminStudio()">View storefront</button>
+        </div>
+
+        <div class="admin-tabs">
+            <div class="admin-tab active" onclick="switchTab('overview', this)">Overview</div>
+            <div class="admin-tab" onclick="switchTab('products', this)">Products</div>
+            <div class="admin-tab" onclick="switchTab('orders', this)">Orders</div>
+            <div class="admin-tab" onclick="switchTab('agents', this)">Support Agents</div>
+            <div class="admin-tab" onclick="switchTab('settings', this)">Payments & Settings</div>
+        </div>
+
+        <div class="admin-content">
+            <!-- OVERVIEW TAB -->
+            <div id="tab-overview" class="tab-pane active">
+                <h2 style="font-family: Georgia, serif; font-weight: normal; margin-bottom: 1.5rem;">Make today look good.</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Revenue</h4>
+                        <div class="val" id="statRevenue">৳0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Orders</h4>
+                        <div class="val" id="statOrders">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Products</h4>
+                        <div class="val" id="statProducts">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Concierge</h4>
+                        <div class="val" style="font-size: 1.2rem; color: var(--success); margin-top: 5px;">Online</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCTS TAB -->
+            <div id="tab-products" class="tab-pane">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="font-family: Georgia, serif; font-weight: normal;">Products Catalogue</h2>
+                    <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="openProductModal()">+ Add product</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminProductTable"></tbody>
+                </table>
+            </div>
+
+            <!-- ORDERS TAB -->
+            <div id="tab-orders" class="tab-pane">
+                <h2 style="font-family: Georgia, serif; font-weight: normal; margin-bottom: 1.5rem;">Customer Orders</h2>
+                <table id="orderTable">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>Method</th>
+                            <th>TrxID / Details</th>
+                            <th>Product</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- AGENTS TAB -->
+            <div id="tab-agents" class="tab-pane">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="font-family: Georgia, serif; font-weight: normal;">Support Agents</h2>
+                    <button class="btn" style="width: auto; padding: 0.6rem 1.2rem;" onclick="openAgentModal()">+ Add agent</button>
+                </div>
+                <div id="agentListContainer"></div>
+            </div>
+
+            <!-- SETTINGS TAB -->
+            <div id="tab-settings" class="tab-pane">
+                <h2 style="font-family: Georgia, serif; font-weight: normal; margin-bottom: 1.5rem;">Payments & Store Settings</h2>
+                
+                <div class="promise-box">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Payment Methods Management</h3>
+                    <div id="paymentConfigContainer"></div>
+                </div>
+
+                <div class="promise-box">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Store & Agent Payment Numbers</h3>
+                    <div class="form-group">
+                        <label>bKash Agent/Personal Number</label>
+                        <input type="text" id="bkashNum" placeholder="017XXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Nagad Number</label>
+                        <input type="text" id="nagadNum" placeholder="018XXXXXXXX">
+                    </div>
+                    <button class="btn" style="width: auto;" onclick="savePaymentNumbers()">Save Numbers</button>
+                </div>
+
+                <div class="promise-box">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Store Details</h3>
+                    <div class="form-group">
+                        <label>Store Display Name</label>
+                        <input type="text" id="settingStoreName" value="FM Fashion">
+                    </div>
+                    <button class="btn" style="width: auto;" onclick="saveStoreSettings()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
     <!-- Buy Modal -->
     <div class="modal" id="buyModal">
         <div class="modal-content">
-            <h2>Complete Your Order</h2>
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="custName" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="text" id="custPhone" placeholder="01XXXXXXXXX">
-            </div>
+            <h2>Checkout</h2>
+            <div id="paymentInstructions" style="background:#f4efe6; padding:0.8rem; border-radius:4px; margin-bottom:1rem; font-size:0.85rem; color:var(--text-main);"></div>
+            <div class="form-group"><label>Full Name</label><input type="text" id="cName"></div>
+            <div class="form-group"><label>Phone Number</label><input type="text" id="cPhone"></div>
             <div class="form-group">
                 <label>Payment Method</label>
-                <select id="payMethod">
-                    <option value="bKash">bKash (বিকাশ)</option>
-                    <option value="Nagad">Nagad (নগদ)</option>
-                    <option value="Rocket">Rocket (রকেট)</option>
+                <select id="cMethod"></select>
+            </div>
+            <div class="form-group"><label>TrxID / Sender Number</label><input type="text" id="cTrx"></div>
+            <button class="btn" onclick="submitOrder()">Confirm Order</button>
+            <br><br><button class="btn btn-outline" onclick="closeModal('buyModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <h2 id="productModalTitle">Add New Product</h2>
+            <input type="hidden" id="editProductId">
+            <div class="form-group"><label>Product Name</label><input type="text" id="pName"></div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="pCat">
+                    <option value="Women">Women</option>
+                    <option value="Men">Men</option>
+                    <option value="Accessories">Accessories</option>
                 </select>
             </div>
-            <div class="form-group">
-                <label>Transaction ID / Sender Number</label>
-                <input type="text" id="payDetails" placeholder="Enter TrxID or Number">
-            </div>
-            <button class="btn" onclick="submitOrder()">Confirm Order</button>
-            <br><br>
-            <button class="btn btn-danger" onclick="closeModal('buyModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Admin Login Modal -->
-    <div class="modal" id="adminModal">
-        <div class="modal-content">
-            <h2>Admin Authentication</h2>
-            <div class="form-group">
-                <label>Password (Default: admin123)</label>
-                <input type="password" id="adminPass" placeholder="Enter password">
-            </div>
-            <button class="btn" onclick="verifyAdmin()">Login</button>
-            <br><br>
-            <button class="btn btn-danger" onclick="closeModal('adminModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- Floating Chatbot -->
-    <div class="chat-widget">
-        <div class="chat-box" id="chatBox">
-            <div class="chat-header">
-                <span>Aura Support Agent</span>
-                <span style="cursor:pointer;" onclick="toggleChat()">✕</span>
-            </div>
-            <div class="chat-messages" id="chatMsgs">
-                <div class="msg bot">Welcome to Aura Luxury! How can I assist you today?</div>
-            </div>
-            <div class="chat-input">
-                <input type="text" id="chatInp" placeholder="Type a message...">
-                <button onclick="sendChat()">Send</button>
-            </div>
-        </div>
-        <button class="chat-btn" onclick="toggleChat()">💬</button>
-    </div>
-
-    <script>
-        let products = JSON.parse(localStorage.getItem('luxury_products')) || [
-            { id: 1, name: 'Royal Gold Watch', cat: 'Watch', price: 3500, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400' },
-            { id: 2, name: 'Smart Noise-Cancel Pods', cat: 'Gadget', price: 2200, img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400' }
-        ];
-
-        let orders = JSON.parse(localStorage.getItem('luxury_orders')) || [];
-        let selectedProduct = null;
-        let currentFilter = 'All';
-        let isAdminLoggedIn = false;
-
-        function renderProducts() {
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = '';
-            
-            const filtered = currentFilter === 'All' ? products : products.filter(p => p.cat === currentFilter);
-            
-            if(filtered.length === 0) {
-                grid.innerHTML = `<p style="color:var(--text-muted); grid-column: 1/-1; text-align:center;">No products found in this category.</p>`;
-                return;
-            }
-
-            filtered.forEach(p => {
-                grid.innerHTML += `
-                    <div class="card">
-                        <img src="${p.img}" alt="${p.name}">
-                        <div class="card-body">
-                            <h3>${p.name}</h3>
-                            <div class="price">${p.price} ৳</div>
-                            <button class="btn" onclick="openBuyModal(${p.id})">Buy Now</button>
-                            ${isAdminLoggedIn ? `<button class="btn btn-danger" onclick="deleteProduct(${p.id})">Delete Product</button>` : ''}
-                        </div>
-                    </div>
-                `;
-            });
-            localStorage.setItem('luxury_products', JSON.stringify(products));
-        }
-
-        function filterCategory(cat, btn) {
-            currentFilter = cat;
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderProducts();
-        }
-
-        function openBuyModal(id) {
-            selectedProduct = products.find(p => p.id === id);
-            openModal('buyModal');
-        }
-
-        function submitOrder() {
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const method = document.getElementById('payMethod').value;
-            const details = document.getElementById('payDetails').value.trim();
-
-            if(!name || !phone || !details) {
-                alert('Please fill in all customer and payment details.');
-                return;
-            }
-
-            const newOrder = {
-                id: Date.now(),
-                name, phone, method, details,
-                product: selectedProduct.name,
-                status: 'Pending'
-            };
-
-            orders.push(newOrder);
-            localStorage.setItem('luxury_orders', JSON.stringify(orders));
-            alert('Order placed successfully! We will verify your payment soon.');
-            closeModal('buyModal');
-            document.getElementById('custName').value = '';
-            document.getElementById('custPhone').value = '';
-            document.getElementById('payDetails').value = '';
-            renderOrders();
-        }
-
-        function toggleAdminView() {
-            if(isAdminLoggedIn) {
-                isAdminLoggedIn = false;
-                document.getElementById('adminPanel').style.display = 'none';
-                alert('Logged out from Admin Panel.');
-                renderProducts();
-            } else {
-                openModal('adminModal');
-            }
-        }
-
-        function verifyAdmin() {
-            const pass = document.getElementById('adminPass').value;
-            if(pass === 'admin123') {
-                isAdminLoggedIn = true;
-                document.getElementById('adminPanel').style.display = 'block';
-                closeModal('adminModal');
-                document.getElementById('adminPass').value = '';
-                renderProducts();
-                renderOrders();
-                alert('Admin access granted.');
-            } else {
-                alert('Incorrect password!');
-            }
-        }
-
-        function addProduct() {
-            const name = document.getElementById('pName').value.trim();
-            const cat = document.getElementById('pCat').value;
-            const price = document.getElementById('pPrice').value.trim();
-            const img = document.getElementById('pImg').value.trim() || 'https://via.placeholder.com/400';
-
-            if(!name || !price) {
-                alert('Please provide product name and price.');
-                return;
-            }
-
-            products.push({ id: Date.now(), name, cat, price: Number(price), img });
-            renderProducts();
-            document.getElementById('pName').value = '';
-            document.getElementById('pPrice').value = '';
-            document.getElementById('pImg').value = '';
-            alert('Product uploaded successfully!');
-        }
-
-        function deleteProduct(id) {
-            if(confirm('Are you sure you want to delete this product?')) {
-                products = products.filter(p => p.id !== id);
-                renderProducts();
-            }
-        }
-
-        function renderOrders() {
-            const tbody = document.querySelector('#orderTable tbody');
-            tbody.innerHTML = '';
-            if(orders.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">No orders received yet.</td></tr>`;
-                return;
-            }
-            orders.forEach(o => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${o.name}</td>
-                        <td>${o.phone}</td>
-                        <td>${o.method}</td>
-                        <td>${o.details}</td>
-                        <td>${o.product}</td>
-                        <td style="color:var(--accent); font-weight:bold;">${o.status}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        function toggleChat() {
-            const box = document.getElementById('chatBox');
-            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function sendChat() {
-            const inp = document.getElementById('chatInp');
-            const msgs = document.getElementById('chatMsgs');
-            const text = inp.value.trim();
-            if(text) {
-                msgs.innerHTML += `<div class="msg user">${text}</div>`;
-                inp.value = '';
-                msgs.scrollTop = msgs.scrollHeight;
-
-                setTimeout(() => {
-                    let reply = "Thank you for reaching out! Our team will contact you shortly.";
-                    const lower = text.toLowerCase();
-                    if(lower.includes('bKash') || lower.includes('payment') || lower.includes('বিকাশ')) {
-                        reply = "You can easily pay via bKash, Nagad, or Rocket during checkout by providing your TrxID.";
-                    } else if(lower.includes('delivery') || lower.includes('ডেলিভারি')) {
-                        reply = "We deliver all over Bangladesh within 2-3 business days.";
-                    }
-                    msgs.innerHTML += `<div class="msg bot">${reply}</div>`;
-                    msgs.scrollTop = msgs.scrollHeight;
-                }, 1000);
-            }
-        }
-
-        renderProducts();
-    </script>
-</body>
-</html>
+            <div class="form-group"><label>Price (BDT)</label><input type="number" id="pPrice"></div>
+            <div class="form-group"><label>Stock (Units)</label><input type="number" id="pStock" value="10"></div>
+            <div class="form-group"><label>Image URL</label><input type="text" id="pImg" placeholder="https://..."></div>
+            <button class="btn" onclick="saveProduct()">Save Product</button>
+            <br>
