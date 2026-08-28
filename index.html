@@ -1,401 +1,472 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUXORA | Exclusive Fashion & Luxury Store</title>
-  <style>
-    :root {
-      --bg-main: #0b0c10;
-      --bg-card: #12141c;
-      --bg-input: #1a1d28;
-      --accent: #d4af37;
-      --accent-hover: #f3e5ab;
-      --text-main: #f5f5f7;
-      --text-muted: #a0a5b5;
-      --border: rgba(212, 175, 55, 0.3);
-      --danger: #ff4d4d;
-      --success: #00e676;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Store | Premium E-Commerce</title>
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    /* Top Bar & Header */
-    .announcement-bar { background: var(--accent); color: #000; text-align: center; padding: 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; border-bottom: 1px solid var(--border); background: rgba(11, 12, 16, 0.95); position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
-    .logo { font-size: 24px; font-weight: 700; letter-spacing: 3px; color: var(--text-main); text-decoration: none; }
-    nav button { background: transparent; border: 1px solid transparent; color: var(--text-main); font-size: 12px; font-weight: 600; margin-left: 8px; padding: 8px 14px; border-radius: 4px; cursor: pointer; letter-spacing: 1px; transition: 0.3s; }
-    nav button:hover, nav button.active { border-color: var(--accent); color: var(--accent); }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding-bottom: 60px;
+        }
 
-    .container { padding: 40px 5%; max-width: 1250px; margin: 0 auto; }
-    .section-title { text-align: center; font-size: 28px; letter-spacing: 2px; margin-bottom: 25px; color: var(--accent); }
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    /* Hero Section */
-    .hero { text-align: center; padding: 60px 20px; background: radial-gradient(circle at center, #1a1d28 0%, #0b0c10 100%); border-bottom: 1px solid var(--border); }
-    .hero h1 { font-size: 38px; margin-bottom: 15px; color: var(--text-main); letter-spacing: 2px; }
-    .hero p { color: var(--text-muted); margin-bottom: 25px; font-size: 15px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
 
-    /* Category Filter Buttons */
-    .filter-bar { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
-    .filter-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-    .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
+        nav button {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
 
-    /* Product Grid */
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
-    .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; position: relative; transition: 0.3s; }
-    .product-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-    .product-category { position: absolute; top: 22px; left: 22px; background: rgba(0,0,0,0.85); color: var(--accent); font-size: 10px; padding: 4px 8px; border-radius: 3px; font-weight: 700; text-transform: uppercase; border: 1px solid var(--border); }
-    .product-img { width: 100%; height: 260px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; background: #1a1d28; }
-    .product-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-    .product-price { color: var(--accent); font-weight: 700; font-size: 18px; margin-bottom: 12px; }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
 
-    /* Buttons */
-    .btn { width: 100%; padding: 10px; background: var(--accent); color: #000; border: none; font-weight: 700; border-radius: 4px; cursor: pointer; transition: 0.2s; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
-    .btn:hover { background: var(--accent-hover); }
-    .btn-secondary { background: #333; color: #fff; }
-    .btn-danger { background: var(--danger); color: #fff; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
 
-    /* Admin View */
-    #adminView { display: none; }
-    .admin-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
-    @media(max-width: 850px) { .admin-layout { grid-template-columns: 1fr; } }
-    .form-container, .table-container { background: var(--bg-card); border: 1px solid var(--border); padding: 25px; border-radius: 8px; }
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--text-muted); }
-    .input-field, select { width: 100%; padding: 10px; background: var(--bg-input); border: 1px solid var(--border); color: #fff; border-radius: 4px; outline: none; font-size: 14px; }
-    .admin-table { width: 100%; border-collapse: collapse; }
-    .admin-table th, .admin-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    /* Chat Bot Widget */
-    .chat-widget { position: fixed; bottom: 25px; right: 25px; z-index: 150; }
-    .chat-btn { background: var(--accent); color: #000; width: 55px; height: 55px; border-radius: 50%; border: none; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(212,175,55,0.4); font-size: 22px; }
-    .chat-box { display: none; position: absolute; bottom: 70px; right: 0; width: 320px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-    .chat-header { font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 10px; color: var(--accent); display: flex; justify-content: space-between; }
-    .chat-messages { height: 180px; overflow-y: auto; font-size: 13px; margin-bottom: 10px; padding-right: 5px; }
-    .msg-bot { background: var(--bg-input); padding: 8px; border-radius: 5px; margin-bottom: 8px; border-left: 3px solid var(--accent); }
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
 
-    /* Modal */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 200; }
-    .modal-content { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; width: 90%; max-width: 420px; border-radius: 8px; }
-  </style>
+        .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .card p { color: var(--accent); font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
+
+        .btn {
+            background-color: var(--accent);
+            color: #000;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: #fff;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid var(--border);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 { margin-bottom: 1rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.6rem;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 4px;
+        }
+
+        /* Admin Panel */
+        .admin-section {
+            display: none;
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table, th, td { border: 1px solid var(--border); }
+        th, td { padding: 0.75rem; text-align: left; }
+        th { background: var(--bg-main); }
+
+        /* Chatbot */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 300;
+        }
+
+        .chat-btn {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chat-box {
+            display: none;
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            width: 300px;
+            height: 380px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: var(--bg-main);
+            padding: 0.75rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 0.75rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .msg { padding: 0.5rem; border-radius: 4px; font-size: 0.85rem; max-width: 80%; }
+        .msg.bot { background: var(--border); align-self: flex-start; }
+        .msg.user { background: var(--accent); color: #000; align-self: flex-end; }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid var(--border);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+        }
+
+        .chat-input button {
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="announcement-bar">
-    EXCLUSIVE LUXURY COLLECTION | SECURE COD & MOBILE BANKING AVAILABLE
-  </div>
+    <header>
+        <div class="logo">Luxury Store</div>
+        <nav>
+            <button onclick="openModal('adminModal')">Admin Login</button>
+        </nav>
+    </header>
 
-  <header>
-    <a href="#" class="logo">LUXORA</a>
-    <nav>
-      <button id="navShop" class="active" onclick="switchTab('shop')">SHOP</button>
-      <button id="navAdmin" onclick="switchTab('admin')">ADMIN PANEL</button>
-    </nav>
-  </header>
+    <div class="container">
+        <h2>পণ্যসমূহ</h2>
+        <br>
+        <div class="grid" id="productGrid"></div>
 
-  <!-- Shop View -->
-  <div id="shopView">
-    <section class="hero">
-      <h1>ELEGANCE REDEFINED</h1>
-      <p>Discover timeless pieces designed to make you stand out in every luxury occasion.</p>
-      <button class="btn" style="width: auto; padding: 12px 30px;" onclick="document.getElementById('collections').scrollIntoView({behavior:'smooth'})">EXPLORE COLLECTION</button>
-    </section>
-
-    <div class="container" id="collections">
-      <h2 class="section-title">EXCLUSIVE COLLECTIONS</h2>
-      
-      <!-- Category Filter -->
-      <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterProducts('All', this)">All</button>
-        <button class="filter-btn" onclick="filterProducts('Evening Wear', this)">Evening Wear</button>
-        <button class="filter-btn" onclick="filterProducts('Jewelry', this)">Jewelry</button>
-        <button class="filter-btn" onclick="filterProducts('Bags', this)">Bags</button>
-        <button class="filter-btn" onclick="filterProducts('Outerwear', this)">Outerwear</button>
-      </div>
-
-      <div class="product-grid" id="productGrid"></div>
-    </div>
-  </div>
-
-  <!-- Admin View -->
-  <div class="container" id="adminView">
-    <h2 class="section-title">ADMIN MANAGEMENT PANEL</h2>
-
-    <!-- Payment Gateway Section -->
-    <div class="form-container" style="margin-bottom: 30px;">
-      <h3 style="color: var(--accent); margin-bottom: 15px;">Manage Payment Methods (bKash / Nagad / Rocket)</h3>
-      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-        <input type="text" id="mBankName" class="input-field" placeholder="Method (e.g. bKash Personal)" style="flex: 1;">
-        <input type="text" id="mBankNumber" class="input-field" placeholder="Phone Number" style="flex: 1;">
-        <button class="btn" style="width: auto; padding: 0 25px;" onclick="addPaymentMethod()">Add Method</button>
-      </div>
-      <ul id="paymentList" style="margin-top: 15px; list-style: none;"></ul>
+        <!-- Admin Panel Area -->
+        <div class="admin-section" id="adminPanel">
+            <h2>অ্যাডমিন কন্ট্রোল প্যানেল</h2>
+            <br>
+            <h3>নতুন প্রোডাক্ট যোগ করুন</h3>
+            <div class="form-group"><input type="text" id="pName" placeholder="প্রোডাক্ট নাম"></div>
+            <div class="form-group"><input type="number" id="pPrice" placeholder="মূল্য (টাকা)"></div>
+            <div class="form-group"><input type="text" id="pImg" placeholder="ইমেজ URL (যেমন: https://via.placeholder.com/150)"></div>
+            <button class="btn" onclick="addProduct()">প্রোডাক্ট আপলোড করুন</button>
+            
+            <br><hr><br>
+            <h3>গ্রাহকদের অর্ডারের তালিকা</h3>
+            <table id="orderTable">
+                <thead>
+                    <tr>
+                        <th>নাম</th>
+                        <th>মোবাইল</th>
+                        <th>পেমেন্ট মেথড</th>
+                        <th>TrxID / নম্বর</th>
+                        <th>প্রোডাক্ট</th>
+                        <th>স্ট্যাটাস</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="admin-layout">
-      <!-- Add/Edit Form -->
-      <div class="form-container">
-        <h3 style="margin-bottom: 20px; color: var(--accent);" id="formTitle">Add Product</h3>
-        <input type="hidden" id="editProductId">
-        <div class="form-group">
-          <label>Product Title</label>
-          <input type="text" id="pTitle" class="input-field" placeholder="Product Title">
-        </div>
-        <div class="form-group">
-          <label>Price ($)</label>
-          <input type="number" id="pPrice" class="input-field" placeholder="Price">
-        </div>
-        <div class="form-group">
-          <label>Category</label>
-          <select id="pCategory" class="input-field">
-            <option value="Evening Wear">Evening Wear</option>
-            <option value="Jewelry">Jewelry</option>
-            <option value="Bags">Bags</option>
-            <option value="Outerwear">Outerwear</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Product Image URL</label>
-          <input type="text" id="pImg" class="input-field" placeholder="https://...">
-        </div>
-        <button class="btn" id="saveProductBtn" onclick="saveProduct()">Save Product</button>
-      </div>
-
-      <!-- Product List Table -->
-      <div class="table-container" style="overflow-x: auto;">
-        <h3 style="margin-bottom: 20px; color: var(--accent);">Inventory Items</h3>
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="adminTableBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Chatbot Widget -->
-  <div class="chat-widget">
-    <button class="chat-btn" onclick="toggleChat()">💬</button>
-    <div class="chat-box" id="chatBox">
-      <div class="chat-header">
-        <span>LUXORA Support</span>
-        <span style="cursor: pointer;" onclick="toggleChat()">✕</span>
-      </div>
-      <div class="chat-messages" id="chatMessages">
-        <div class="msg-bot">Hello! Welcome to LUXORA. How can we assist you today?</div>
-      </div>
-      <input type="text" id="chatInput" class="input-field" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendChatMessage()">
-      <button class="btn" style="margin-top: 8px;" onclick="connectAgent()">Contact Agent (WhatsApp)</button>
-    </div>
-  </div>
-
-  <!-- Admin Login & Recovery Modal -->
-  <div class="modal" id="loginModal">
-    <div class="modal-content">
-      <h3 style="margin-bottom: 20px; text-align: center; color: var(--accent);" id="modalTitle">ADMIN LOGIN</h3>
-      
-      <div id="loginForm">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="loginEmail" class="input-field" value="admin@luxora.com">
-        </div>
-        <div class="form-group">
-          <label>Password (Default: admin123)</label>
-          <input type="password" id="loginPass" class="input-field" placeholder="Enter password">
-        </div>
-        <button class="btn" onclick="handleLogin()">Login</button>
-        <p style="text-align: center; margin-top: 12px; font-size: 12px; color: var(--accent); cursor: pointer;" onclick="showForgotForm()">Forgot Password?</p>
-      </div>
-
-      <div id="forgotForm" style="display: none;">
-        <div class="form-group">
-          <label>Registered Phone Number (Default: 01700000000)</label>
-          <input type="text" id="recoveryPhone" class="input-field" placeholder="017XXXXXXXX">
-        </div>
-        <div class="form-group">
-          <label>New Password</label>
-          <input type="password" id="newPass" class="input-field" placeholder="Enter new password">
-        </div>
-        <button class="btn" onclick="handlePasswordReset()">Reset Password</button>
-        <p style="text-align: center; margin-top: 12px; font-size: 12px; color: var(--text-muted); cursor: pointer;" onclick="showLoginForm()">Back to Login</p>
-      </div>
-
-      <button class="btn btn-secondary" style="margin-top: 10px;" onclick="closeLoginModal()">Cancel</button>
-    </div>
-  </div>
-
-  <script>
-    // In-memory master initial data
-    const defaultProducts = [
-      { id: 1, name: "Black Elegant Evening Dress", price: 129, category: "Evening Wear", image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500" },
-      { id: 2, name: "White Tailored Blazer", price: 149, category: "Outerwear", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" },
-      { id: 3, name: "Gold Chronograph Watch", price: 499, category: "Jewelry", image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500" },
-      { id: 4, name: "Leather Luxury Bag", price: 299, category: "Bags", image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" }
-    ];
-
-    let productsList = [...defaultProducts];
-    let paymentMethods = [
-      { name: "bKash Personal", num: "01700000000" },
-      { name: "Nagad Personal", num: "01800000000" }
-    ];
-
-    let isLoggedIn = false;
-    let adminPass = "admin123";
-    let adminPhone = "01700000000";
-    let currentCategory = "All";
-
-    function switchTab(tab) {
-      if(tab === 'admin' && !isLoggedIn) {
-        document.getElementById('loginModal').style.display = 'flex';
-        return;
-      }
-      document.getElementById('navShop').classList.toggle('active', tab === 'shop');
-      document.getElementById('navAdmin').classList.toggle('active', tab === 'admin');
-      document.getElementById('shopView').style.display = tab === 'shop' ? 'block' : 'none';
-      document.getElementById('adminView').style.display = tab === 'admin' ? 'block' : 'none';
-
-      if(tab === 'shop') renderShop();
-      if(tab === 'admin') { renderAdmin(); renderPaymentMethods(); }
-    }
-
-    function handleLogin() {
-      const email = document.getElementById('loginEmail').value;
-      const pass = document.getElementById('loginPass').value;
-
-      if(email === 'admin@luxora.com' && pass === adminPass) {
-        isLoggedIn = true;
-        closeLoginModal();
-        switchTab('admin');
-      } else { 
-        alert('Invalid Email or Password!'); 
-      }
-    }
-
-    function showForgotForm() {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('forgotForm').style.display = 'block';
-      document.getElementById('modalTitle').innerText = 'RECOVER PASSWORD';
-    }
-
-    function showLoginForm() {
-      document.getElementById('forgotForm').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('modalTitle').innerText = 'ADMIN LOGIN';
-    }
-
-    function handlePasswordReset() {
-      const phone = document.getElementById('recoveryPhone').value;
-      const newP = document.getElementById('newPass').value;
-
-      if(phone === adminPhone && newP) {
-        adminPass = newP;
-        alert('Password changed successfully! Please login with your new password.');
-        showLoginForm();
-      } else { 
-        alert('Incorrect Phone Number!'); 
-      }
-    }
-
-    function closeLoginModal() { 
-      document.getElementById('loginModal').style.display = 'none'; 
-    }
-
-    function filterProducts(cat, btnElem) {
-      currentCategory = cat;
-      const buttons = document.querySelectorAll('.filter-btn');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      if(btnElem) btnElem.classList.add('active');
-      renderShop();
-    }
-
-    function renderShop() {
-      const grid = document.getElementById('productGrid');
-      grid.innerHTML = '';
-      
-      const filtered = currentCategory === 'All' 
-        ? productsList 
-        : productsList.filter(p => p.category === currentCategory);
-
-      if(filtered.length === 0) {
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No products found in this category.</p>`;
-        return;
-      }
-
-      filtered.forEach(p => {
-        grid.innerHTML += `
-          <div class="product-card">
-            <span class="product-category">${p.category}</span>
-            <img src="${p.image}" class="product-img" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500'">
-            <div>
-              <div class="product-title">${p.name}</div>
-              <div class="product-price">$${p.price}</div>
+    <!-- Buy Modal -->
+    <div class="modal" id="buyModal">
+        <div class="modal-content">
+            <h2>অর্ডার কনফার্মেশন</h2>
+            <div class="form-group">
+                <label>আপনার নাম</label>
+                <input type="text" id="custName" required>
             </div>
-            <button class="btn" onclick="alert('Order Placed for ${p.name}!')">Order Now</button>
-          </div>
-        `;
-      });
-    }
+            <div class="form-group">
+                <label>মোবাইল নম্বর</label>
+                <input type="text" id="custPhone" required>
+            </div>
+            <div class="form-group">
+                <label>পেমেন্ট মেথড সিলেক্ট করুন</label>
+                <select id="payMethod">
+                    <option value="bKash">bKash (বিকাশ)</option>
+                    <option value="Rocket">Rocket (রকেট)</option>
+                    <option value="Nagad">Nagad (নগদ)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Transaction ID / প্রেরকের নম্বর</label>
+                <input type="text" id="payDetails" required>
+            </div>
+            <button class="btn" onclick="submitOrder()">অর্ডার নিশ্চিত করুন</button>
+            <br><br>
+            <button class="btn btn-danger" onclick="closeModal('buyModal')">বন্ধ করুন</button>
+        </div>
+    </div>
 
-    function renderAdmin() {
-      const tbody = document.getElementById('adminTableBody');
-      tbody.innerHTML = '';
-      productsList.forEach(p => {
-        tbody.innerHTML += `
-          <tr>
-            <td><img src="${p.image}" style="width: 38px; height: 38px; object-fit: cover; border-radius: 4px;"></td>
-            <td>${p.name}</td>
-            <td>$${p.price}</td>
-            <td>${p.category}</td>
-            <td>
-              <button onclick="editProduct(${p.id})" style="background: var(--accent); color:#000; border:none; padding: 4px 8px; border-radius: 3px; font-weight: bold; cursor:pointer;">Edit</button>
-              <button onclick="deleteProduct(${p.id})" style="background: var(--danger); color:#fff; border:none; padding: 4px 8px; border-radius: 3px; font-weight: bold; cursor:pointer;">Delete</button>
-            </td>
-          </tr>
-        `;
-      });
-    }
+    <!-- Admin Login Modal -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <h2>অ্যাডমিন লগইন</h2>
+            <div class="form-group">
+                <label>পাসওয়ার্ড প্রবেশ করুন (Default: admin123)</label>
+                <input type="password" id="adminPass">
+            </div>
+            <button class="btn" onclick="loginAdmin()">লগইন</button>
+            <br><br>
+            <button class="btn btn-danger" onclick="closeModal('adminModal')">বন্ধ করুন</button>
+        </div>
+    </div>
 
-    function saveProduct() {
-      const id = document.getElementById('editProductId').value;
-      const name = document.getElementById('pTitle').value;
-      const price = document.getElementById('pPrice').value;
-      const category = document.getElementById('pCategory').value;
-      const image = document.getElementById('pImg').value || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500';
+    <!-- Chatbot -->
+    <div class="chat-widget">
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">Luxury Store AI Support</div>
+            <div class="chat-messages" id="chatMsgs">
+                <div class="msg bot">হ্যালো! কিভাবে সাহায্য করতে পারি?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInp" placeholder="মেসেজ লিখুন...">
+                <button onclick="sendChat()">Send</button>
+            </div>
+        </div>
+        <button class="chat-btn" onclick="toggleChat()">💬</button>
+    </div>
 
-      if(!name || !price) return alert('Please enter title and price');
+    <script>
+        // Initial Data
+        let products = JSON.parse(localStorage.getItem('products')) || [
+            { id: 1, name: 'Premium Luxury Watch', price: 2500, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300' },
+            { id: 2, name: 'Wireless Headphones', price: 1800, img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300' }
+        ];
 
-      if(id) {
-        productsList = productsList.map(p => p.id == id ? { id: Number(id), name, price: Number(price), category, image } : p);
-        alert('Product Updated Successfully!');
-      } else {
-        productsList.push({ id: Date.now(), name, price: Number(price), category, image });
-        alert('Product Added Successfully!');
-      }
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        let selectedProduct = null;
 
-      document.getElementById('editProductId').value = '';
-      document.getElementById('pTitle').value = '';
-      document.getElementById('pPrice').value = '';
-      document.getElementById('pImg').value = '';
-      document.getElementById('formTitle').innerText = 'Add Product';
-      
-      renderAdmin();
-      renderShop();
-    }
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            products.forEach(p => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <img src="${p.img}" alt="${p.name}">
+                        <h3>${p.name}</h3>
+                        <p>${p.price} ৳</p>
+                        <button class="btn" onclick="openBuyModal(${p.id})">Buy Now</button>
+                        ${document.getElementById('adminPanel').style.display === 'block' ? 
+                        `<br><button class="btn btn-danger" onclick="deleteProduct(${p.id})">Delete</button>` : ''}
+                    </div>
+                `;
+            });
+            localStorage.setItem('products', JSON.stringify(products));
+        }
 
-    function editProduct(id) {
-      const p = productsList.find(item => item.id === id);
-      if(p) {
-        document.getElementById('editProductId').value = p.id;
-        document.getElementById('pTitle').value = p.name;
-        document.getElementById('pPrice').value = p.price;
-        document.getElementById('pCategory').value = p.category;
-        document.getElementById('pImg').value = p.image;
-        document.get
+        function openBuyModal(id) {
+            selectedProduct = products.find(p => p.id === id);
+            openModal('buyModal');
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const method = document.getElementById('payMethod').value;
+            const details = document.getElementById('payDetails').value;
+
+            if(!name || !phone || !details) {
+                alert('সকল তথ্য সঠিকভাবে পূরণ করুন।');
+                return;
+            }
+
+            const newOrder = {
+                id: Date.now(),
+                name, phone, method, details,
+                product: selectedProduct.name,
+                status: 'Pending'
+            };
+
+            orders.push(newOrder);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            alert('আপনার অর্ডার সফলভাবে সম্পন্ন হয়েছে!');
+            closeModal('buyModal');
+            renderOrders();
+        }
+
+        function loginAdmin() {
+            const pass = document.getElementById('adminPass').value;
+            if(pass === 'admin123') {
+                document.getElementById('adminPanel').style.display = 'block';
+                closeModal('adminModal');
+                renderProducts();
+                renderOrders();
+                alert('অ্যাডমিন মোড চালু হয়েছে।');
+            } else {
+                alert('ভুল পাসওয়ার্ড!');
+            }
+        }
+
+        function addProduct() {
+            const name = document.getElementById('pName').value;
+            const price = document.getElementById('pPrice').value;
+            const img = document.getElementById('pImg').value || 'https://via.placeholder.com/150';
+
+            if(name && price) {
+                products.push({ id: Date.now(), name, price, img });
+                renderProducts();
+                document.getElementById('pName').value = '';
+                document.getElementById('pPrice').value = '';
+                document.getElementById('pImg').value = '';
+            }
+        }
+
+        function deleteProduct(id) {
+            products = products.filter(p => p.id !== id);
+            renderProducts();
+        }
+
+        function renderOrders() {
+            const tbody = document.querySelector('#orderTable tbody');
+            tbody.innerHTML = '';
+            orders.forEach(o => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${o.name}</td>
+                        <td>${o.phone}</td>
+                        <td>${o.method}</td>
+                        <td>${o.details}</td>
+                        <td>${o.product}</td>
+                        <td>${o.status}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function toggleChat() {
+            const box = document.getElementById('chatBox');
+            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function sendChat() {
+            const inp = document.getElementById('chatInp');
+            const msgs = document.getElementById('chatMsgs');
+            if(inp.value.trim()) {
+                msgs.innerHTML += `<div class="msg user">${inp.value}</div>`;
+                const userTxt = inp.value.toLowerCase();
+                inp.value = '';
+                setTimeout(() => {
+                    let reply = "ধন্যবাদ মেসেজের জন্য। আমাদের প্রতিনিধি দ্রুত যোগাযোগ করবে।";
+                    if(userTxt.includes("bkash") || userTxt.includes("পেমেন্ট")) reply = "আপনি বিকাশ, রকেট বা নগদের মাধ্যমে পেমেন্ট করতে পারবেন।";
+                    msgs.innerHTML += `<div class="msg bot">${reply}</div>`;
+                    msgs.scrollTop = msgs.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        renderProducts();
+    </script>
+</body>
+</html>
