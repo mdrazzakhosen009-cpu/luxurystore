@@ -30,7 +30,6 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
-        /* Smooth hiding/showing for views */
         .view-section { display: none; }
         .view-section.active { display: block; }
     </style>
@@ -54,7 +53,6 @@
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wider uppercase text-luxury-dark">
                 <a href="#" onclick="switchView('store-view')" class="hover:text-luxury-gold transition">Home</a>
                 <a href="#shop" onclick="switchView('store-view'); scrollToSection('shop-section');" class="hover:text-luxury-gold transition">Shop</a>
-                <a href="#collection" onclick="switchView('store-view'); scrollToSection('collection-section');" class="hover:text-luxury-gold transition">Collection</a>
                 <a href="#" onclick="openAuthModal('login')" class="hover:text-luxury-gold transition">Login / Register</a>
                 <a href="#" onclick="openAdminCheck()" class="text-luxury-gold font-semibold hover:underline">Admin Panel</a>
             </nav>
@@ -128,7 +126,7 @@
         </section>
     </div>
 
-    <!-- ==================== VIEW 2: SECURE ADMIN PANEL (/admin) ==================== -->
+    <!-- ==================== VIEW 2: SECURE ADMIN PANEL ==================== -->
     <div id="admin-view" class="view-section bg-gray-100 min-h-screen">
         <!-- Admin Login Screen -->
         <div id="admin-login-screen" class="max-w-md mx-auto pt-32 px-4">
@@ -271,4 +269,580 @@
                     </div>
 
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <h3 class="font-serif text-lg font-bold mb-4
+                        <h3 class="font-serif text-lg font-bold mb-4">Customer Orders & Payments (bKash, Nagad, Rocket, COD)</h3>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-600">
+                                    <th class="p-3">Order ID</th>
+                                    <th class="p-3">Customer</th>
+                                    <th class="p-3">Items</th>
+                                    <th class="p-3">Method</th>
+                                    <th class="p-3">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-orders-table" class="text-sm divide-y divide-gray-100">
+                                <!-- Loaded via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 4: SETTINGS & SECURITY -->
+                <div id="admin-tab-settings" class="admin-tab-content hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 max-w-xl">
+                        <h3 class="font-serif text-lg font-bold mb-4">Admin Security & Password Settings</h3>
+                        <form onsubmit="handleUpdateAdminCredentials(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Admin Recovery Phone (For Reset / OTP)</label>
+                                <input type="text" id="admin-recovery-phone" class="w-full px-3 py-2 border border-gray-300 text-sm" placeholder="+88017xxxxxxxx">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold mb-1">New Password</label>
+                                <input type="password" id="admin-new-pass" required class="w-full px-3 py-2 border border-gray-300 text-sm" placeholder="New secure password">
+                            </div>
+                            <button type="submit" class="bg-luxury-dark text-white px-6 py-3 text-xs uppercase tracking-widest font-semibold hover:bg-luxury-gold transition">Update Security Credentials</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ==================== FLOATING AI & AGENT CHATBOT WIDGET ==================== -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChatWindow()" class="bg-luxury-dark text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-xl hover:bg-luxury-gold transition duration-300">
+            <i class="fa-regular fa-comment-dots"></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chat-window" class="hidden absolute bottom-20 right-0 w-80 sm:w-96 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col h-[480px]">
+            <!-- Header -->
+            <div class="bg-luxury-dark text-white p-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                    <h4 class="font-serif text-sm font-bold tracking-wider">Luxora Assistant</h4>
+                </div>
+                <button onclick="toggleChatWindow()" class="text-gray-300 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <!-- Messages Box -->
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50 text-xs">
+                <div class="bg-white p-3 rounded-lg border border-gray-200 max-w-[85%]">
+                    Welcome to Luxora Luxury Fashion! How may I assist you today? (Type <b>"contact with agent"</b> to speak directly with a human agent on WhatsApp).
+                </div>
+            </div>
+            <!-- Input Area -->
+            <div class="p-3 bg-white border-t border-gray-200 flex items-center space-x-2">
+                <input type="text" id="chat-input" onkeypress="if(event.key==='Enter') sendChatMessage()" placeholder="Type your message..." class="flex-1 px-3 py-2 border border-gray-300 text-xs focus:outline-none focus:border-luxury-gold">
+                <button onclick="sendChatMessage()" class="bg-luxury-dark text-white px-4 py-2 text-xs uppercase font-semibold hover:bg-luxury-gold transition"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AUTH MODAL (Login / Signup) ==================== -->
+    <div id="auth-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md p-8 rounded-lg relative shadow-2xl">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-luxury-dark"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 id="auth-modal-title" class="font-serif text-2xl font-bold mb-2 text-center">Customer Sign In</h3>
+            <p class="text-xs text-gray-500 text-center mb-6">Login required to place orders securely</p>
+            
+            <form onsubmit="handleUserAuth(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Email Address</label>
+                    <input type="email" id="auth-email" required class="w-full px-3 py-2 border border-gray-300 text-sm" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Password</label>
+                    <input type="password" id="auth-password" required class="w-full px-3 py-2 border border-gray-300 text-sm" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full bg-luxury-dark text-white py-3 text-xs uppercase tracking-widest font-semibold hover:bg-luxury-gold transition">Continue</button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-xs text-gray-500 mb-3">Or sign in instantly with social accounts</p>
+                <div class="flex justify-center space-x-3">
+                    <button onclick="socialLogin('Google')" class="px-4 py-2 border border-gray-300 text-xs font-semibold hover:border-luxury-gold transition"><i class="fa-brands fa-google text-red-500 mr-2"></i>Google</button>
+                    <button onclick="socialLogin('Facebook')" class="px-4 py-2 border border-gray-300 text-xs font-semibold hover:border-luxury-gold transition"><i class="fa-brands fa-facebook text-blue-600 mr-2"></i>Facebook</button>
+                    <button onclick="socialLogin('TikTok')" class="px-4 py-2 border border-gray-300 text-xs font-semibold hover:border-luxury-gold transition"><i class="fa-brands fa-tiktok mr-2"></i>TikTok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CART & CHECKOUT DRAWER ==================== -->
+    <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
+        <div class="bg-white w-full max-w-md h-full p-6 flex flex-col justify-between shadow-2xl">
+            <div>
+                <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+                    <h3 class="font-serif text-xl font-bold">Shopping Bag</h3>
+                    <button onclick="toggleCart()" class="text-gray-400 hover:text-luxury-dark"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div id="cart-items-container" class="py-6 space-y-4 overflow-y-auto max-h-[50vh]">
+                    <!-- Cart items rendered here -->
+                </div>
+            </div>
+            <div class="border-t border-gray-200 pt-4">
+                <div class="flex justify-between font-serif text-lg font-bold mb-4">
+                    <span>Total:</span>
+                    <span id="cart-total-price">$0.00</span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-xs uppercase tracking-wider font-semibold mb-1">Select Payment Method</label>
+                    <select id="payment-method-select" class="w-full px-3 py-2 border border-gray-300 text-xs uppercase">
+                        <option value="bKash">bKash</option>
+                        <option value="Nagad">Nagad</option>
+                        <option value="Rocket">Rocket</option>
+                        <option value="Cash on Delivery">Cash on Delivery (COD)</option>
+                    </select>
+                </div>
+                <button onclick="checkoutOrder()" class="w-full bg-luxury-gold text-white py-3 text-xs uppercase tracking-widest font-semibold hover:bg-luxury-dark transition">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORGOT PASSWORD MODAL -->
+    <div id="forgot-pass-modal" class="hidden fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+        <div class="bg-white max-w-sm w-full p-6 rounded-lg relative">
+            <button onclick="closeForgotPassModal()" class="absolute top-3 right-3 text-gray-400"><i class="fa-solid fa-xmark"></i></button>
+            <h4 class="font-serif text-lg font-bold mb-2">Reset Admin Password</h4>
+            <p class="text-xs text-gray-500 mb-4">Enter your recovery phone number to receive temporary password reset instructions.</p>
+            <input type="text" id="forgot-phone-input" placeholder="Registered Phone Number" class="w-full px-3 py-2 border border-gray-300 text-sm mb-4">
+            <button onclick="submitForgotPass()" class="w-full bg-luxury-dark text-white py-2 text-xs uppercase tracking-widest">Verify & Reset</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const defaultProducts = [
+            { id: 1, name: 'Black Elegant Dress', category: 'Evening Wear', price: 129.99, image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=800' },
+            { id: 2, name: 'White Classic Blazer', category: 'Outerwear', price: 149.99, image: 'https://images.unsplash.com/photo-1550639525-c97d455acf70?auto=format&fit=crop&q=80&w=800' },
+            { id: 3, name: 'Silk Evening Gown', category: 'Evening Wear', price: 199.99, image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&q=80&w=800' },
+            { id: 4, name: 'Beige Trench Coat', category: 'Outerwear', price: 159.99, image: 'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&q=80&w=800' },
+            { id: 5, name: 'Casual Linen Shirt', category: 'Casual Wear', price: 79.99, image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=800' },
+            { id: 6, name: 'Gold Designer Handbag', category: 'Accessories', price: 219.99, image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&q=80&w=800' }
+        ];
+
+        const defaultAgents = [
+            { name: 'Sarah Khan', phone: '8801711111111' },
+            { name: 'Tanvir Ahmed', phone: '8801822222222' }
+        ];
+
+        if (!localStorage.getItem('luxora_products')) {
+            localStorage.setItem('luxora_products', JSON.stringify(defaultProducts));
+        }
+        if (!localStorage.getItem('luxora_agents')) {
+            localStorage.setItem('luxora_agents', JSON.stringify(defaultAgents));
+        }
+        if (!localStorage.getItem('luxora_users')) {
+            localStorage.setItem('luxora_users', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('luxora_orders')) {
+            localStorage.setItem('luxora_orders', JSON.stringify([]));
+        }
+        if (!localStorage.getItem('luxora_admin_pass')) {
+            localStorage.setItem('luxora_admin_pass', 'admin123');
+            localStorage.setItem('luxora_admin_phone', '8801700000000');
+        }
+
+        let cart = [];
+        let currentUser = JSON.parse(localStorage.getItem('luxora_current_user')) || null;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts('All');
+            updateCartBadge();
+            
+            // Check if URL has hash for admin
+            if(window.location.hash === '#admin') {
+                openAdminCheck();
+            }
+        });
+
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            if(viewId === 'store-view') window.location.hash = '';
+            window.scrollTo(0, 0);
+        }
+
+        function renderProducts(category) {
+            const products = JSON.parse(localStorage.getItem('luxora_products'));
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'All' ? products : products.filter(p => p.category === category);
+
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="relative overflow-hidden aspect-[3/4] bg-gray-100">
+                                <img src="${p.image}" alt="${p.name}" class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[10px] uppercase tracking-widest text-gray-400">${p.category}</span>
+                                <h3 class="font-serif text-base font-medium text-luxury-dark mt-1">${p.name}</h3>
+                                <p class="text-sm font-semibold text-luxury-gold mt-2">$${p.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button onclick="addToCart(${p.id})" class="w-full bg-luxury-dark text-white py-2.5 text-xs uppercase tracking-widest hover:bg-luxury-gold transition">Add to Bag</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterProducts(cat) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-luxury-dark', 'text-white');
+                btn.classList.add('bg-white', 'border', 'border-gray-300', 'text-luxury-dark');
+            });
+            event.target.classList.remove('bg-white', 'border', 'border-gray-300', 'text-luxury-dark');
+            event.target.classList.add('bg-luxury-dark', 'text-white');
+            renderProducts(cat);
+        }
+
+        function addToCart(productId) {
+            const products = JSON.parse(localStorage.getItem('luxora_products'));
+            const product = products.find(p => p.id === productId);
+            cart.push(product);
+            updateCartBadge();
+            toggleCart();
+        }
+
+        function updateCartBadge() {
+            document.getElementById('cart-badge').innerText = cart.length;
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+            if(!drawer.classList.contains('hidden')) {
+                renderCartItems();
+            }
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+            let total = 0;
+
+            if(cart.length === 0) {
+                container.innerHTML = '<p class="text-xs text-gray-500 text-center py-8">Your shopping bag is empty.</p>';
+                document.getElementById('cart-total-price').innerText = '$0.00';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                container.innerHTML += `
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <img src="${item.image}" class="w-12 h-16 object-cover">
+                            <div>
+                                <h4 class="text-xs font-bold">${item.name}</h4>
+                                <p class="text-xs text-luxury-gold">$${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-400 text-xs hover:text-red-600"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total-price').innerText = '$' + total.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartBadge();
+            renderCartItems();
+        }
+
+        function checkoutOrder() {
+            if(!currentUser) {
+                toggleCart();
+                openAuthModal();
+                alert('Please sign in or register before completing your order.');
+                return;
+            }
+            if(cart.length === 0) {
+                alert('Your bag is empty.');
+                return;
+            }
+
+            const paymentMethod = document.getElementById('payment-method-select').value;
+            const orders = JSON.parse(localStorage.getItem('luxora_orders'));
+            
+            const newOrder = {
+                id: 'ORD-' + Math.floor(100000 + Math.random() * 900000),
+                customer: currentUser.email,
+                items: cart.map(i => i.name).join(', '),
+                method: paymentMethod,
+                amount: cart.reduce((sum, i) => sum + i.price, 0).toFixed(2)
+            };
+
+            orders.push(newOrder);
+            localStorage.setItem('luxora_orders', JSON.stringify(orders));
+            
+            alert(`Order successful! Paid via ${paymentMethod}. Thank you for shopping with Luxora.`);
+            cart = [];
+            updateCartBadge();
+            toggleCart();
+        }
+
+        function openAuthModal() {
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function handleUserAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const users = JSON.parse(localStorage.getItem('luxora_users'));
+            
+            let user = users.find(u => u.email === email);
+            if(!user) {
+                user = { email, provider: 'Email/Password', date: new Date().toLocaleDateString() };
+                users.push(user);
+                localStorage.setItem('luxora_users', JSON.stringify(users));
+            }
+
+            currentUser = user;
+            localStorage.setItem('luxora_current_user', JSON.stringify(currentUser));
+            closeAuthModal();
+            alert('Successfully signed in!');
+        }
+
+        function socialLogin(provider) {
+            const email = `user_${Math.floor(Math.random()*1000)}@${provider.toLowerCase()}.com`;
+            const users = JSON.parse(localStorage.getItem('luxora_users'));
+            const user = { email, provider, date: new Date().toLocaleDateString() };
+            users.push(user);
+            localStorage.setItem('luxora_users', JSON.stringify(users));
+
+            currentUser = user;
+            localStorage.setItem('luxora_current_user', JSON.stringify(currentUser));
+            closeAuthModal();
+            alert(`Successfully logged in with ${provider}!`);
+        }
+
+        // ==================== ADMIN PANEL LOGIC ====================
+        function openAdminCheck() {
+            switchView('admin-view');
+            window.location.hash = 'admin';
+            const isAdminLoggedIn = sessionStorage.getItem('luxora_admin_logged');
+            if(isAdminLoggedIn === 'true') {
+                document.getElementById('admin-login-screen').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                loadAdminData();
+            } else {
+                document.getElementById('admin-login-screen').classList.remove('hidden');
+                document.getElementById('admin-dashboard').classList.add('hidden');
+            }
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('admin-email-input').value;
+            const pass = document.getElementById('admin-pass-input').value;
+            const savedPass = localStorage.getItem('luxora_admin_pass');
+
+            if(pass === savedPass) {
+                sessionStorage.setItem('luxora_admin_logged', 'true');
+                document.getElementById('admin-login-screen').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                loadAdminData();
+            } else {
+                alert('Invalid admin credentials.');
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('luxora_admin_logged');
+            switchView('store-view');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+
+            document.querySelectorAll('.admin-nav-link').forEach(el => {
+                el.classList.remove('bg-luxury-gold', 'text-white');
+                el.classList.add('hover:bg-luxury-gray', 'text-gray-300');
+            });
+            event.target.classList.add('bg-luxury-gold', 'text-white');
+        }
+
+        function loadAdminData() {
+            const products = JSON.parse(localStorage.getItem('luxora_products'));
+            const tableBody = document.getElementById('admin-product-table-body');
+            tableBody.innerHTML = '';
+            products.forEach(p => {
+                tableBody.innerHTML += `
+                    <tr class="border-b border-gray-100">
+                        <td class="p-4"><img src="${p.image}" class="w-10 h-12 object-cover"></td>
+                        <td class="p-4 font-semibold">${p.name}</td>
+                        <td class="p-4 text-gray-500">${p.category}</td>
+                        <td class="p-4 text-luxury-gold font-bold">$${p.price.toFixed(2)}</td>
+                        <td class="p-4"><button onclick="deleteProduct(${p.id})" class="text-red-500 hover:text-red-700"><i class="fa-solid fa-trash"></i></button></td>
+                    </tr>
+                `;
+            });
+
+            const agents = JSON.parse(localStorage.getItem('luxora_agents'));
+            const agentsList = document.getElementById('admin-agents-list');
+            agentsList.innerHTML = '';
+            agents.forEach((a, idx) => {
+                agentsList.innerHTML += `
+                    <div class="flex justify-between items-center p-3 border border-gray-200 rounded-lg">
+                        <div>
+                            <h4 class="font-semibold text-sm">${a.name}</h4>
+                            <p class="text-xs text-gray-500">WhatsApp: +${a.phone}</p>
+                        </div>
+                        <button onclick="removeAgent(${idx})" class="text-red-500 text-xs hover:underline">Remove</button>
+                    </div>
+                `;
+            });
+
+            const users = JSON.parse(localStorage.getItem('luxora_users'));
+            const usersTable = document.getElementById('admin-users-table');
+            usersTable.innerHTML = users.length ? '' : '<tr><td colspan="4" class="p-4 text-gray-500 text-center">No users registered yet.</td></tr>';
+            users.forEach(u => {
+                usersTable.innerHTML += `
+                    <tr class="border-b border-gray-100">
+                        <td class="p-3 font-semibold">${u.email.split('@')[0]}</td>
+                        <td class="p-3 text-gray-600">${u.email}</td>
+                        <td class="p-3"><span class="bg-gray-100 px-2 py-1 rounded text-xs">${u.provider}</span></td>
+                        <td class="p-3 text-gray-500">${u.date}</td>
+                    </tr>
+                `;
+            });
+
+            const orders = JSON.parse(localStorage.getItem('luxora_orders'));
+            const ordersTable = document.getElementById('admin-orders-table');
+            ordersTable.innerHTML = orders.length ? '' : '<tr><td colspan="5" class="p-4 text-gray-500 text-center">No orders placed yet.</td></tr>';
+            orders.forEach(o => {
+                ordersTable.innerHTML += `
+                    <tr class="border-b border-gray-100">
+                        <td class="p-3 font-semibold text-luxury-gold">${o.id}</td>
+                        <td class="p-3">${o.customer}</td>
+                        <td class="p-3 text-gray-600">${o.items}</td>
+                        <td class="p-3"><span class="bg-luxury-gold/10 text-luxury-gold font-bold px-2 py-1 rounded text-xs">${o.method}</span></td>
+                        <td class="p-3 font-bold">$${o.amount}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function handleAddNewProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('new-prod-name').value;
+            const category = document.getElementById('new-prod-category').value;
+            const price = parseFloat(document.getElementById('new-prod-price').value);
+            const image = document.getElementById('new-prod-img').value;
+
+            const products = JSON.parse(localStorage.getItem('luxora_products'));
+            const newProduct = { id: Date.now(), name, category, price, image };
+            products.push(newProduct);
+            
+            localStorage.setItem('luxora_products', JSON.stringify(products));
+            loadAdminData();
+            renderProducts('All');
+            e.target.reset();
+            alert('Product added successfully and stored permanently!');
+        }
+
+        function deleteProduct(id) {
+            let products = JSON.parse(localStorage.getItem('luxora_products'));
+            products = products.filter(p => p.id !== id);
+            localStorage.setItem('luxora_products', JSON.stringify(products));
+            loadAdminData();
+            renderProducts('All');
+        }
+
+        function handleAddNewAgent(e) {
+            e.preventDefault();
+            const name = document.getElementById('agent-name').value;
+            const phone = document.getElementById('agent-phone').value;
+
+            const agents = JSON.parse(localStorage.getItem('luxora_agents'));
+            agents.push({ name, phone });
+            localStorage.setItem('luxora_agents', JSON.stringify(agents));
+            loadAdminData();
+            e.target.reset();
+            alert('Agent successfully added!');
+        }
+
+        function removeAgent(index) {
+            const agents = JSON.parse(localStorage.getItem('luxora_agents'));
+            agents.splice(index, 1);
+            localStorage.setItem('luxora_agents', JSON.stringify(agents));
+            loadAdminData();
+        }
+
+        function handleUpdateAdminCredentials(e) {
+            e.preventDefault();
+            const phone = document.getElementById('admin-recovery-phone').value;
+            const newPass = document.getElementById('admin-new-pass').value;
+
+            if(phone) localStorage.setItem('luxora_admin_phone', phone);
+            localStorage.setItem('luxora_admin_pass', newPass);
+            alert('Admin security credentials updated successfully!');
+        }
+
+        function openForgotPassModal() {
+            document.getElementById('forgot-pass-modal').classList.remove('hidden');
+        }
+        function closeForgotPassModal() {
+            document.getElementById('forgot-pass-modal').classList.add('hidden');
+        }
+        function submitForgotPass() {
+            const phone = document.getElementById('forgot-phone-input').value;
+            const savedPhone = localStorage.getItem('luxora_admin_phone');
+            if(phone === savedPhone) {
+                alert('Recovery verified! Temporary Admin Password is set to: admin123');
+                localStorage.setItem('luxora_admin_pass', 'admin123');
+                closeForgotPassModal();
+            } else {
+                alert('Phone number does not match admin recovery record.');
+            }
+        }
+
+        function toggleChatWindow() {
+            document.getElementById('chat-window').classList.toggle('hidden');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if(!text) return;
+
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML += `<div class="bg-luxury-gold/10 p-3 rounded-lg ml-auto max-w-[85%] text-right font-medium">${text}</div>`;
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            setTimeout(() => {
+                let reply = "Thank you for reaching out to Luxora. How else can I assist your luxury shopping?";
+                
+                if(text.toLowerCase().includes('contact with agent') || text.toLowerCase().includes('agent')) {
+                    const agents = JSON.parse(localStorage.getItem('luxora_agents'));
+                    const agent = agents[0] || { name: 'Support Agent', phone: '8801700000000' };
+                    reply = `Connecting you instantly with our agent <b>${agent.name}</b>. <br><a href="https://wa.me/${agent.phone}?text=Hello%20Agent,%20I%20need%20assistance%20regarding%20Luxora%20products." target="_blank" class="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded font-bold uppercase tracking-wider text-[10px]"><i class="fa-brands fa-whatsapp mr-1"></i> Open Agent WhatsApp Chat</a>`;
+                }
+
+                chatMessages.innerHTML += `<div class="bg-white p-3 rounded-lg border border-gray-200 max-w-[85%]">${reply}</div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 600);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
