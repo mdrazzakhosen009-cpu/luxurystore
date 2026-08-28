@@ -14,57 +14,73 @@
             --text-main: #f5f5f5;
             --text-muted: #aaaaaa;
             --border: #333333;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.3s ease;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: var(--bg-primary); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-        h1, h2, h3, .logo { font-family: 'Cinzel', serif; letter-spacing: 2px; }
+        h1, h2, h3, .logo { font-family: 'Cinzel', serif; letter-spacing: 1px; }
 
         .announcement-bar { background: var(--accent); color: #000; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; padding: 8px; font-weight: 600; }
 
-        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid var(--border); background: rgba(15,15,15,0.95); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
-        .logo { font-size: 24px; font-weight: 700; color: var(--text-main); text-decoration: none; }
-        .nav-icons { display: flex; gap: 20px; align-items: center; }
-        .nav-icons button, .nav-icons a { background: none; border: none; color: var(--text-main); font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; text-transform: uppercase; transition: var(--transition); }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; border-bottom: 1px solid var(--border); background: rgba(15,15,15,0.95); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        .logo { font-size: 22px; font-weight: 700; color: var(--text-main); text-decoration: none; }
+        .nav-icons { display: flex; gap: 15px; align-items: center; }
+        .nav-icons button, .nav-icons a { background: none; border: none; color: var(--text-main); font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; text-transform: uppercase; transition: var(--transition); }
         .nav-icons button:hover { color: var(--accent); }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 40px 5%; }
-        .section-title { font-size: 28px; margin-bottom: 30px; text-align: center; font-weight: 600; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 30px 5%; }
+        .section-title { font-size: 26px; margin-bottom: 25px; text-align: center; font-weight: 600; }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        .product-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
-        .product-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .product-img-container { position: relative; width: 100%; height: 380px; overflow: hidden; background: #222; }
+        /* Tabs & Dashboard Navigation */
+        .admin-nav { display: flex; gap: 10px; border-bottom: 1px solid var(--border); margin-bottom: 25px; padding-bottom: 10px; overflow-x: auto; }
+        .admin-nav-btn { background: none; border: none; color: var(--text-muted); font-size: 14px; font-weight: 600; cursor: pointer; padding: 8px 16px; border-radius: 4px; transition: var(--transition); text-transform: uppercase; white-space: nowrap; }
+        .admin-nav-btn.active, .admin-nav-btn:hover { background: var(--accent); color: #000; }
+
+        /* Product Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        .product-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
+        .product-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .product-img-container { width: 100%; height: 340px; overflow: hidden; background: #222; }
         .product-img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .product-card:hover .product-img { transform: scale(1.05); }
-        .product-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-card:hover .product-img { transform: scale(1.03); }
+        .product-info { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; }
         .product-category { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 5px; }
-        .product-title { font-size: 16px; font-weight: 600; margin-bottom: 10px; }
+        .product-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
         .product-price { font-size: 15px; color: var(--accent); font-weight: 600; margin-bottom: 15px; }
-        .btn-primary { background: var(--text-main); color: var(--bg-primary); border: none; padding: 12px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: var(--transition); width: 100%; }
+        
+        .btn-primary { background: var(--text-main); color: var(--bg-primary); border: none; padding: 12px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: var(--transition); width: 100%; border-radius: 4px; }
         .btn-primary:hover { background: var(--accent); color: #000; }
 
-        .admin-section { max-width: 900px; margin: 0 auto; background: var(--bg-secondary); padding: 40px; border: 1px solid var(--border); border-radius: 6px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--text-muted); }
+        /* Admin Panels & Forms */
+        .admin-section { background: var(--bg-secondary); padding: 30px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 30px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; color: var(--text-muted); font-weight: 600; }
         .form-control { width: 100%; padding: 12px; background: var(--bg-primary); border: 1px solid var(--border); color: #fff; border-radius: 4px; font-size: 14px; }
         .form-control:focus { border-color: var(--accent); outline: none; }
-        .admin-table { width: 100%; border-collapse: collapse; margin-top: 30px; }
-        .admin-table th, .admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
-        .admin-table th { color: var(--accent); font-family: 'Cinzel', serif; }
-        .btn-danger { background: #800; color: #fff; border: none; padding: 6px 12px; cursor: pointer; border-radius: 3px; }
+        
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .admin-table th, .admin-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+        .admin-table th { color: var(--accent); font-family: 'Cinzel', serif; font-size: 12px; }
+        .btn-danger { background: #8a2be2; background-color: #a93226; color: #fff; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; font-size: 12px; }
+        .btn-danger:hover { background-color: #cb4335; }
 
-        .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
-        .chat-btn { background: var(--accent); color: #000; width: 60px; height: 60px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: var(--transition); }
-        .chat-btn:hover { transform: scale(1.1); }
-        .chat-box { position: absolute; bottom: 80px; right: 0; width: 320px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        .chat-header { background: var(--accent); color: #000; padding: 15px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
-        .chat-body { padding: 15px; height: 250px; overflow-y: auto; font-size: 13px; display: flex; flex-direction: column; gap: 10px; }
-        .chat-msg { background: #222; padding: 10px; border-radius: 5px; max-width: 80%; }
+        /* Card boxes for Orders and Users */
+        .data-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: 6px; padding: 18px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .data-card h4 { font-size: 15px; color: var(--accent); margin-bottom: 4px; }
+        .data-card p { font-size: 13px; color: var(--text-muted); }
+
+        /* Chat Widget */
+        .chat-widget { position: fixed; bottom: 25px; right: 25px; z-index: 999; }
+        .chat-btn { background: var(--accent); color: #000; width: 55px; height: 55px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; font-size: 22px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: var(--transition); }
+        .chat-btn:hover { transform: scale(1.08); }
+        .chat-box { position: absolute; bottom: 70px; right: 0; width: 310px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .chat-header { background: var(--accent); color: #000; padding: 12px 15px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .chat-body { padding: 12px; height: 220px; overflow-y: auto; font-size: 13px; display: flex; flex-direction: column; gap: 8px; }
+        .chat-msg { background: #222; padding: 8px 12px; border-radius: 6px; max-width: 85%; }
         .chat-msg.agent { background: #2a2518; border-left: 3px solid var(--accent); }
         .chat-footer { padding: 10px; border-top: 1px solid var(--border); display: flex; gap: 5px; }
         .chat-footer input { flex-grow: 1; padding: 8px; background: var(--bg-primary); border: 1px solid var(--border); color: #fff; border-radius: 4px; font-size: 12px; }
-        .chat-footer button { padding: 8px 12px; background: var(--accent); border: none; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        .chat-footer button { padding: 8px 12px; background: var(--accent); border: none; font-weight: bold; cursor: pointer; border-radius: 4px; font-size: 12px; }
 
         .hidden { display: none !important; }
     </style>
@@ -89,10 +105,10 @@
 
     <!-- ADMIN LOGIN VIEW -->
     <div id="admin-login-view" class="container hidden">
-        <div class="admin-section" style="max-width: 450px;">
-            <h2 class="section-title" style="font-size: 22px;">Admin Portal</h2>
+        <div class="admin-section" style="max-width: 420px; margin: 40px auto;">
+            <h2 class="section-title" style="font-size: 20px;">Admin Portal</h2>
             <div class="form-group">
-                <label>Admin Email / ID</label>
+                <label>Admin Email</label>
                 <input type="email" id="login-email" class="form-control" value="admin@luxora.com">
             </div>
             <div class="form-group">
@@ -100,80 +116,145 @@
                 <input type="password" id="login-pass" class="form-control" placeholder="••••••••">
             </div>
             <button class="btn-primary" onclick="handleLogin()">Login Dashboard</button>
-            <p style="margin-top: 15px; font-size: 12px; text-align: center; color: var(--accent); cursor: pointer;" onclick="forgotPassword()">Forgot Password?</p>
+            <p style="margin-top: 15px; font-size: 12px; text-align: center; color: var(--accent); cursor: pointer;" onclick="forgotPasswordModal()">Forgot Password?</p>
         </div>
     </div>
 
     <!-- ADMIN DASHBOARD VIEW -->
     <div id="admin-dashboard-view" class="container hidden">
         <div class="admin-section">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="font-family: Cinzel; font-size: 22px;">Manage Store & Settings</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="font-family: Cinzel; font-size: 20px;">Admin Control Center</h2>
                 <button class="btn-primary" style="width: auto; padding: 8px 15px;" onclick="showView('store')">Back to Store</button>
             </div>
 
-            <!-- Payment & Security Setup -->
-            <div style="background: var(--bg-primary); padding: 20px; border-radius: 6px; margin-bottom: 30px; border: 1px solid var(--border);">
-                <h3 style="font-size: 15px; color: var(--accent); margin-bottom: 15px;">Payment & Admin Security Configuration</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                    <div class="form-group" style="margin-bottom:0;">
-                        <label>bKash / Nagad / Rocket Number</label>
-                        <input type="text" id="cfg-bkash" class="form-control">
+            <!-- Dashboard Navigation Tabs -->
+            <div class="admin-nav">
+                <button class="admin-nav-btn active" onclick="switchAdminTab('settings')">Settings & Payments</button>
+                <button class="admin-nav-btn" onclick="switchAdminTab('products')">Products</button>
+                <button class="admin-nav-btn" onclick="switchAdminTab('orders')">Orders View</button>
+                <button class="admin-nav-btn" onclick="switchAdminTab('users')">Sign-up Users</button>
+                <button class="admin-nav-btn" onclick="switchAdminTab('agents')">Support Agents</button>
+            </div>
+
+            <!-- TAB 1: SETTINGS & PAYMENTS -->
+            <div id="tab-settings" class="admin-tab-content">
+                <h3 style="font-size: 15px; color: var(--accent); margin-bottom: 15px;">Payment Number Setup & Security</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
+                    <div class="form-group">
+                        <label>bKash Number</label>
+                        <input type="text" id="cfg-bkash" class="form-control" placeholder="017xxxxxxxx">
                     </div>
-                    <div class="form-group" style="margin-bottom:0;">
-                        <label>Admin Recovery Phone Number</label>
-                        <input type="text" id="cfg-phone" class="form-control">
+                    <div class="form-group">
+                        <label>Nagad Number</label>
+                        <input type="text" id="cfg-nagad" class="form-control" placeholder="018xxxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label>Rocket Number</label>
+                        <input type="text" id="cfg-rocket" class="form-control" placeholder="019xxxxxxxx">
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                    <div class="form-group" style="margin-bottom:0;">
-                        <label>New Password Change</label>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 10px;">
+                    <div class="form-group">
+                        <label>Admin Recovery Phone</label>
+                        <input type="text" id="cfg-phone" class="form-control" placeholder="+8801XXXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Change Admin Password</label>
                         <input type="password" id="cfg-newpass" class="form-control" placeholder="New Password">
                     </div>
-                    <div style="display: flex; align-items: flex-end;">
-                        <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
-                    </div>
+                </div>
+                <button class="btn-primary" style="margin-top: 15px;" onclick="saveSettings()">Save All Settings</button>
+            </div>
+
+            <!-- TAB 2: PRODUCTS -->
+            <div id="tab-products" class="admin-tab-content hidden">
+                <h3 style="font-size: 15px; margin-bottom: 15px; color: var(--accent);">Add New Luxury Product</h3>
+                <div class="form-group">
+                    <label>Product Title</label>
+                    <input type="text" id="p-title" class="form-control" placeholder="e.g. Silk Evening Gown">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="p-category" class="form-control">
+                        <option>Evening Wear</option>
+                        <option>Outerwear</option>
+                        <option>Casual Wear</option>
+                        <option>Accessories</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Price ($)</label>
+                    <input type="number" id="p-price" class="form-control" placeholder="199.99">
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="text" id="p-img" class="form-control" placeholder="https://images.unsplash.com/...">
+                </div>
+                <button class="btn-primary" onclick="addProduct()">Save Product Permanently</button>
+
+                <div style="overflow-x: auto; margin-top: 25px;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-product-list"></tbody>
+                    </table>
                 </div>
             </div>
 
-            <!-- Add Product Form -->
-            <h3 style="font-size: 16px; margin-bottom: 15px; color: var(--accent);">Add New Luxury Product</h3>
-            <div class="form-group">
-                <label>Product Title</label>
-                <input type="text" id="p-title" class="form-control" placeholder="e.g. Silk Evening Gown">
+            <!-- TAB 3: ORDERS VIEW -->
+            <div id="tab-orders" class="admin-tab-content hidden">
+                <h3 style="font-size: 15px; color: var(--accent); margin-bottom: 15px;">Customer Orders List</h3>
+                <div id="admin-orders-list">
+                    <!-- Dynamic Orders will load here -->
+                </div>
             </div>
-            <div class="form-group">
-                <label>Category</label>
-                <select id="p-category" class="form-control">
-                    <option>Evening Wear</option>
-                    <option>Outerwear</option>
-                    <option>Casual Wear</option>
-                    <option>Accessories</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Price ($)</label>
-                <input type="number" id="p-price" class="form-control" placeholder="199.99">
-            </div>
-            <div class="form-group">
-                <label>Image URL (Paste direct image link)</label>
-                <input type="text" id="p-img" class="form-control" placeholder="https://images.unsplash.com/...">
-            </div>
-            <button class="btn-primary" onclick="addProduct()">Save Product Permanently</button>
 
-            <!-- Product List Table -->
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="admin-product-list"></tbody>
-            </table>
+            <!-- TAB 4: SIGN-UP USERS -->
+            <div id="tab-users" class="admin-tab-content hidden">
+                <h3 style="font-size: 15px; color: var(--accent); margin-bottom: 15px;">Website Sign-up / Registered Users</h3>
+                <div id="admin-users-list">
+                    <!-- Dynamic Users will load here -->
+                </div>
+            </div>
+
+            <!-- TAB 5: SUPPORT AGENTS -->
+            <div id="tab-agents" class="admin-tab-content hidden">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="font-size: 15px; color: var(--accent);">Manage Chatbot Support Agents</h3>
+                    <button class="btn-primary" style="width: auto; padding: 6px 12px;" onclick="openAgentModal()">+ Add Agent</button>
+                </div>
+                <div id="admin-agents-list">
+                    <!-- Dynamic Agents will load here -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ADD AGENT MODAL -->
+    <div id="agent-modal" class="container hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; align-items: center; justify-content: center;">
+        <div class="admin-section" style="width: 100%; max-width: 400px; margin: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="font-size: 16px; color: var(--accent);">New Support Agent</h3>
+                <span style="cursor: pointer; font-size: 18px;" onclick="closeAgentModal()">✕</span>
+            </div>
+            <div class="form-group">
+                <label>Agent Name</label>
+                <input type="text" id="agent-name" class="form-control" placeholder="Rahim Ahmed">
+            </div>
+            <div class="form-group">
+                <label>WhatsApp / Phone Contact</label>
+                <input type="text" id="agent-phone" class="form-control" placeholder="+8801XXXXXXXXX">
+            </div>
+            <button class="btn-primary" onclick="saveAgent()">Save Agent Account</button>
         </div>
     </div>
 
@@ -182,11 +263,11 @@
         <button class="chat-btn" onclick="toggleChat()">💬</button>
         <div id="chat-box" class="chat-box">
             <div class="chat-header">
-                <span>Luxora Support Agent</span>
+                <span id="chat-header-title">Luxora Support Agent</span>
                 <span style="cursor: pointer;" onclick="toggleChat()">✕</span>
             </div>
             <div class="chat-body" id="chat-body">
-                <div class="chat-msg agent">Hello! Welcome to Luxora. How can I assist you with your luxury order today?</div>
+                <div class="chat-msg agent">Hello! Welcome to Luxora. How can we help you today?</div>
             </div>
             <div class="chat-footer">
                 <input type="text" id="chat-input" placeholder="Type your message..." onkeypress="handleChatKey(event)">
@@ -196,25 +277,36 @@
     </div>
 
     <script>
+        // Initial Data Default Setup
         const defaultProducts = [
             { id: 1, title: 'Black Elegant Dress', category: 'Evening Wear', price: 129.99, image: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80' },
             { id: 2, title: 'White Classic Blazer', category: 'Outerwear', price: 149.99, image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80' },
-            { id: 3, title: 'Silk Evening Gown', category: 'Evening Wear', price: 199.99, image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80' },
-            { id: 4, title: 'Gold Designer Handbag', category: 'Accessories', price: 219.99, image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80' }
+            { id: 3, title: 'Silk Evening Gown', category: 'Evening Wear', price: 199.99, image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80' }
         ];
 
-        let products = JSON.parse(localStorage.getItem('luxora_products'));
-        if (!products || products.length === 0) {
-            products = defaultProducts;
-            localStorage.setItem('luxora_products', JSON.stringify(products));
-        }
+        let products = JSON.parse(localStorage.getItem('luxora_products')) || defaultProducts;
+        let orders = JSON.parse(localStorage.getItem('luxora_orders')) || [
+            { id: 'FM-425581', name: 'Mahbub', phone: '01720121669', date: '8/27/2026', address: 'Mirpur-12, Dhaka', total: '৳1,890', items: 'Sienna Everyday Kurti x1' }
+        ];
+        let users = JSON.parse(localStorage.getItem('luxora_users')) || [
+            { name: 'Mahbub Alam', email: 'mahbub@gmail.com', date: '8/26/2026' },
+            { name: 'Tanvir Hossain', email: 'tanvir@gmail.com', date: '8/27/2026' }
+        ];
+        let agents = JSON.parse(localStorage.getItem('luxora_agents')) || [
+            { id: 1, name: 'Support Lead (Default)', phone: '+8801800000000' }
+        ];
 
         let adminPassword = localStorage.getItem('luxora_pass') || 'admin123';
         let adminPhone = localStorage.getItem('luxora_phone') || '+8801800000000';
-        let bkashNumber = localStorage.getItem('luxora_bkash') || '01700000000';
+        let bkashNum = localStorage.getItem('luxora_bkash') || '01700000000';
+        let nagadNum = localStorage.getItem('luxora_nagad') || '01800000000';
+        let rocketNum = localStorage.getItem('luxora_rocket') || '01900000000';
 
         function saveToStorage() {
             localStorage.setItem('luxora_products', JSON.stringify(products));
+            localStorage.setItem('luxora_orders', JSON.stringify(orders));
+            localStorage.setItem('luxora_users', JSON.stringify(users));
+            localStorage.setItem('luxora_agents', JSON.stringify(agents));
         }
 
         function showView(viewName) {
@@ -222,135 +314,4 @@
             document.getElementById('admin-login-view').classList.add('hidden');
             document.getElementById('admin-dashboard-view').classList.add('hidden');
 
-            if(viewName === 'store') {
-                document.getElementById('store-view').classList.remove('hidden');
-                renderStore();
-            } else if(viewName === 'admin-login') {
-                document.getElementById('admin-login-view').classList.remove('hidden');
-            } else if(viewName === 'admin-dashboard') {
-                document.getElementById('admin-dashboard-view').classList.remove('hidden');
-                renderAdminProducts();
-                document.getElementById('cfg-bkash').value = bkashNumber;
-                document.getElementById('cfg-phone').value = adminPhone;
-            }
-        }
-
-        function renderStore() {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            products.forEach(p => {
-                grid.innerHTML += `
-                    <div class="product-card">
-                        <div class="product-img-container">
-                            <img src="${p.image}" alt="${p.title}" class="product-img" onerror="this.src='https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&q=80'">
-                        </div>
-                        <div class="product-info">
-                            <span class="product-category">${p.category}</span>
-                            <h3 class="product-title">${p.title}</h3>
-                            <div class="product-price">$${p.price}</div>
-                            <button class="btn-primary" onclick="alert('Order placed successfully! Send payment to our bKash/Nagad: ${bkashNumber}')">Order Now</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function handleLogin() {
-            const email = document.getElementById('login-email').value;
-            const pass = document.getElementById('login-pass').value;
-            if(email === 'admin@luxora.com' && pass === adminPassword) {
-                showView('admin-dashboard');
-            } else {
-                alert('Invalid Credentials! Default password is: admin123');
-            }
-        }
-
-        function forgotPassword() {
-            alert(`Recovery instructions sent to your registered admin phone number: ${adminPhone}\nYour current password is: ${adminPassword}`);
-        }
-
-        function saveSettings() {
-            bkashNumber = document.getElementById('cfg-bkash').value;
-            adminPhone = document.getElementById('cfg-phone').value;
-            const newPass = document.getElementById('cfg-newpass').value;
-            
-            if(newPass) {
-                adminPassword = newPass;
-                localStorage.setItem('luxora_pass', adminPassword);
-            }
-            localStorage.setItem('luxora_bkash', bkashNumber);
-            localStorage.setItem('luxora_phone', adminPhone);
-            alert('Settings updated successfully!');
-        }
-
-        function addProduct() {
-            const title = document.getElementById('p-title').value;
-            const category = document.getElementById('p-category').value;
-            const price = parseFloat(document.getElementById('p-price').value);
-            const image = document.getElementById('p-img').value;
-
-            if(!title || !price || !image) {
-                alert('Please fill in all product fields!');
-                return;
-            }
-
-            products.push({ id: Date.now(), title, category, price, image });
-            saveToStorage();
-            renderAdminProducts();
-            
-            document.getElementById('p-title').value = '';
-            document.getElementById('p-price').value = '';
-            document.getElementById('p-img').value = '';
-            alert('Product added successfully!');
-        }
-
-        function deleteProduct(id) {
-            products = products.filter(p => p.id !== id);
-            saveToStorage();
-            renderAdminProducts();
-        }
-
-        function renderAdminProducts() {
-            const tbody = document.getElementById('admin-product-list');
-            tbody.innerHTML = '';
-            products.forEach(p => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td><img src="${p.image}" width="40" height="40" style="object-fit:cover; border-radius:3px;"></td>
-                        package <td>${p.title}</td>
-                        <td>${p.category}</td>
-                        <td>$${p.price}</td>
-                        <td><button class="btn-danger" onclick="deleteProduct(${p.id})">Delete</button></td>
-                    </tr>
-                `;
-            });
-        }
-
-        function toggleChat() {
-            const box = document.getElementById('chat-box');
-            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if(!text) return;
-
-            const body = document.getElementById('chat-body');
-            body.innerHTML += `<div class="chat-msg" style="align-self: flex-end; background: #333;">${text}</div>`;
-            input.value = '';
-
-            setTimeout(() => {
-                body.innerHTML += `<div class="chat-msg agent">Thank you for your message. For instant order or custom queries, please call/WhatsApp our agent at ${adminPhone}.</div>`;
-                body.scrollTop = body.scrollHeight;
-            }, 1000);
-        }
-
-        function handleChatKey(e) {
-            if(e.key === 'Enter') sendChatMessage();
-        }
-
-        renderStore();
-    </script>
-</body>
-</html>
+            if(viewName === 'sto
