@@ -3,32 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Store | Premium E-Commerce</title>
+    <title>Aura Luxury Store | Premium E-Commerce</title>
     <style>
         :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --accent: #38bdf8;
-            --accent-hover: #0284c7;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-            --success: #22c55e;
-            --danger: #ef4444;
+            --bg-main: #0b0c10;
+            --bg-card: #1f2833;
+            --accent: #66fcf1;
+            --accent-dark: #45a29e;
+            --text-main: #ffffff;
+            --text-muted: #c5c6c7;
+            --border: #2c353d;
+            --danger: #ff4c4c;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            padding-bottom: 60px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); padding-bottom: 80px; }
 
         header {
             background-color: var(--bg-card);
@@ -37,238 +26,132 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: sticky; top: 0; z-index: 100;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--accent);
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); letter-spacing: 1px; }
+        
+        .nav-btns button {
+            background: transparent; color: var(--text-main); border: 1px solid var(--accent);
+            padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin-left: 10px; font-weight: bold;
+            transition: 0.3s;
         }
+        .nav-btns button:hover { background: var(--accent); color: #000; }
 
-        nav button {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-left: 10px;
+        .hero {
+            background: linear-gradient(rgba(11,12,16,0.8), rgba(11,12,16,0.8)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200') center/cover;
+            padding: 4rem 2rem; text-align: center; border-bottom: 1px solid var(--border);
         }
+        .hero h1 { font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem; }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; }
 
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
+        /* Category Filter */
+        .filter-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
+        .filter-btn { background: var(--bg-card); color: var(--text-muted); border: 1px solid var(--border); padding: 0.5rem 1.2rem; border-radius: 20px; cursor: pointer; }
+        .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); font-weight: bold; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
 
         .card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            background-color: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+            overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
         }
-
-        .card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-        }
-
-        .card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .card p { color: var(--accent); font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 1rem; }
+        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .card .price { color: var(--accent); font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem; }
 
         .btn {
-            background-color: var(--accent);
-            color: #000;
-            border: none;
-            padding: 0.6rem 1rem;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
+            background-color: var(--accent); color: #000; border: none; padding: 0.7rem 1rem;
+            font-weight: bold; cursor: pointer; width: 100%; text-align: center; border-radius: 4px; transition: 0.3s;
         }
+        .btn:hover { background-color: var(--accent-dark); }
+        .btn-danger { background-color: var(--danger); color: #fff; margin-top: 5px; }
 
-        .btn-danger {
-            background-color: var(--danger);
-            color: #fff;
-        }
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 200; }
+        .modal-content { background: var(--bg-card); padding: 2rem; border-radius: 8px; width: 90%; max-width: 450px; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
+        .modal-content h2 { margin-bottom: 1rem; color: var(--accent); }
 
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 200;
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid var(--border);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-content h2 { margin-bottom: 1rem; }
         .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 0.6rem;
-            background: var(--bg-main);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            border-radius: 4px;
-        }
+        .form-group label { display: block; margin-bottom: 0.4rem; color: var(--text-muted); }
+        .form-group input, .form-group select { width: 100%; padding: 0.7rem; background: var(--bg-main); border: 1px solid var(--border); color: var(--text-main); border-radius: 4px; }
 
-        /* Admin Panel */
-        .admin-section {
-            display: none;
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            margin-top: 2rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-
+        /* Admin Panel Area */
+        .admin-section { display: none; background: var(--bg-card); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); margin-top: 3rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
         table, th, td { border: 1px solid var(--border); }
         th, td { padding: 0.75rem; text-align: left; }
-        th { background: var(--bg-main); }
+        th { background: var(--bg-main); color: var(--accent); }
 
         /* Chatbot */
-        .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 300;
-        }
-
-        .chat-btn {
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .chat-box {
-            display: none;
-            position: absolute;
-            bottom: 60px;
-            right: 0;
-            width: 300px;
-            height: 380px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            flex-direction: column;
-        }
-
-        .chat-header {
-            background: var(--bg-main);
-            padding: 0.75rem;
-            font-weight: bold;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 0.75rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .msg { padding: 0.5rem; border-radius: 4px; font-size: 0.85rem; max-width: 80%; }
+        .chat-widget { position: fixed; bottom: 20px; right: 20px; z-index: 300; }
+        .chat-btn { width: 55px; height: 55px; border-radius: 50%; background: var(--accent); border: none; font-size: 1.5rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .chat-box { display: none; position: absolute; bottom: 70px; right: 0; width: 320px; height: 400px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; flex-direction: column; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .chat-header { background: var(--bg-main); padding: 0.8rem; font-weight: bold; border-bottom: 1px solid var(--border); color: var(--accent); display: flex; justify-content: space-between; }
+        .chat-messages { flex: 1; padding: 0.8rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; }
+        .msg { padding: 0.6rem; border-radius: 6px; font-size: 0.85rem; max-width: 80%; }
         .msg.bot { background: var(--border); align-self: flex-start; }
-        .msg.user { background: var(--accent); color: #000; align-self: flex-end; }
-
-        .chat-input {
-            display: flex;
-            border-top: 1px solid var(--border);
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 0.5rem;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-        }
-
-        .chat-input button {
-            padding: 0.5rem 1rem;
-            background: var(--accent);
-            border: none;
-            cursor: pointer;
-        }
+        .msg.user { background: var(--accent); color: #000; align-self: flex-end; font-weight: bold; }
+        .chat-input { display: flex; border-top: 1px solid var(--border); }
+        .chat-input input { flex: 1; padding: 0.7rem; background: transparent; border: none; color: var(--text-main); outline: none; }
+        .chat-input button { padding: 0.7rem 1.2rem; background: var(--accent); border: none; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Luxury Store</div>
-        <nav>
-            <button onclick="openModal('adminModal')">Admin Login</button>
-        </nav>
+        <div class="logo">AURA LUXURY</div>
+        <div class="nav-btns">
+            <button onclick="toggleAdminView()">Admin Panel</button>
+        </div>
     </header>
 
+    <div class="hero">
+        <h1>Exclusive Luxury Collection</h1>
+        <p>Discover premium lifestyle products crafted for elegance.</p>
+    </div>
+
     <div class="container">
-        <h2>পণ্যসমূহ</h2>
-        <br>
+        <!-- Category Filter -->
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterCategory('All', this)">All Items</button>
+            <button class="filter-btn" onclick="filterCategory('Watch', this)">Watches</button>
+            <button class="filter-btn" onclick="filterCategory('Gadget', this)">Gadgets</button>
+        </div>
+
         <div class="grid" id="productGrid"></div>
 
-        <!-- Admin Panel Area -->
+        <!-- Admin Control Panel (Hidden by default) -->
         <div class="admin-section" id="adminPanel">
-            <h2>অ্যাডমিন কন্ট্রোল প্যানেল</h2>
+            <h2>⚙️ Admin Control Center</h2>
             <br>
-            <h3>নতুন প্রোডাক্ট যোগ করুন</h3>
-            <div class="form-group"><input type="text" id="pName" placeholder="প্রোডাক্ট নাম"></div>
-            <div class="form-group"><input type="number" id="pPrice" placeholder="মূল্য (টাকা)"></div>
-            <div class="form-group"><input type="text" id="pImg" placeholder="ইমেজ URL (যেমন: https://via.placeholder.com/150)"></div>
-            <button class="btn" onclick="addProduct()">প্রোডাক্ট আপলোড করুন</button>
+            <h3>Upload New Product</h3>
+            <div class="form-group"><input type="text" id="pName" placeholder="Product Name"></div>
+            <div class="form-group">
+                <select id="pCat">
+                    <option value="Watch">Watch</option>
+                    <option value="Gadget">Gadget</option>
+                </select>
+            </div>
+            <div class="form-group"><input type="number" id="pPrice" placeholder="Price in BDT"></div>
+            <div class="form-group"><input type="text" id="pImg" placeholder="Image URL (Unsplash or direct link)"></div>
+            <button class="btn" onclick="addProduct()">Upload Product</button>
             
-            <br><hr><br>
-            <h3>গ্রাহকদের অর্ডারের তালিকা</h3>
+            <br><hr style="border-color:var(--border); margin: 2rem 0;"><br>
+            <h3>Customer Orders List</h3>
             <table id="orderTable">
                 <thead>
                     <tr>
-                        <th>নাম</th>
-                        <th>মোবাইল</th>
-                        <th>পেমেন্ট মেথড</th>
-                        <th>TrxID / নম্বর</th>
-                        <th>প্রোডাক্ট</th>
-                        <th>স্ট্যাটাস</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Method</th>
+                        <th>TrxID / Number</th>
+                        <th>Product</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -279,56 +162,59 @@
     <!-- Buy Modal -->
     <div class="modal" id="buyModal">
         <div class="modal-content">
-            <h2>অর্ডার কনফার্মেশন</h2>
+            <h2>Complete Your Order</h2>
             <div class="form-group">
-                <label>আপনার নাম</label>
-                <input type="text" id="custName" required>
+                <label>Full Name</label>
+                <input type="text" id="custName" placeholder="Enter your name">
             </div>
             <div class="form-group">
-                <label>মোবাইল নম্বর</label>
-                <input type="text" id="custPhone" required>
+                <label>Phone Number</label>
+                <input type="text" id="custPhone" placeholder="01XXXXXXXXX">
             </div>
             <div class="form-group">
-                <label>পেমেন্ট মেথড সিলেক্ট করুন</label>
+                <label>Payment Method</label>
                 <select id="payMethod">
                     <option value="bKash">bKash (বিকাশ)</option>
-                    <option value="Rocket">Rocket (রকেট)</option>
                     <option value="Nagad">Nagad (নগদ)</option>
+                    <option value="Rocket">Rocket (রকেট)</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>Transaction ID / প্রেরকের নম্বর</label>
-                <input type="text" id="payDetails" required>
+                <label>Transaction ID / Sender Number</label>
+                <input type="text" id="payDetails" placeholder="Enter TrxID or Number">
             </div>
-            <button class="btn" onclick="submitOrder()">অর্ডার নিশ্চিত করুন</button>
+            <button class="btn" onclick="submitOrder()">Confirm Order</button>
             <br><br>
-            <button class="btn btn-danger" onclick="closeModal('buyModal')">বন্ধ করুন</button>
+            <button class="btn btn-danger" onclick="closeModal('buyModal')">Cancel</button>
         </div>
     </div>
 
     <!-- Admin Login Modal -->
     <div class="modal" id="adminModal">
         <div class="modal-content">
-            <h2>অ্যাডমিন লগইন</h2>
+            <h2>Admin Authentication</h2>
             <div class="form-group">
-                <label>পাসওয়ার্ড প্রবেশ করুন (Default: admin123)</label>
-                <input type="password" id="adminPass">
+                <label>Password (Default: admin123)</label>
+                <input type="password" id="adminPass" placeholder="Enter password">
             </div>
-            <button class="btn" onclick="loginAdmin()">লগইন</button>
+            <button class="btn" onclick="verifyAdmin()">Login</button>
             <br><br>
-            <button class="btn btn-danger" onclick="closeModal('adminModal')">বন্ধ করুন</button>
+            <button class="btn btn-danger" onclick="closeModal('adminModal')">Cancel</button>
         </div>
     </div>
 
-    <!-- Chatbot -->
+    <!-- Floating Chatbot -->
     <div class="chat-widget">
         <div class="chat-box" id="chatBox">
-            <div class="chat-header">Luxury Store AI Support</div>
+            <div class="chat-header">
+                <span>Aura Support Agent</span>
+                <span style="cursor:pointer;" onclick="toggleChat()">✕</span>
+            </div>
             <div class="chat-messages" id="chatMsgs">
-                <div class="msg bot">হ্যালো! কিভাবে সাহায্য করতে পারি?</div>
+                <div class="msg bot">Welcome to Aura Luxury! How can I assist you today?</div>
             </div>
             <div class="chat-input">
-                <input type="text" id="chatInp" placeholder="মেসেজ লিখুন...">
+                <input type="text" id="chatInp" placeholder="Type a message...">
                 <button onclick="sendChat()">Send</button>
             </div>
         </div>
@@ -336,31 +222,48 @@
     </div>
 
     <script>
-        // Initial Data
-        let products = JSON.parse(localStorage.getItem('products')) || [
-            { id: 1, name: 'Premium Luxury Watch', price: 2500, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300' },
-            { id: 2, name: 'Wireless Headphones', price: 1800, img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300' }
+        let products = JSON.parse(localStorage.getItem('luxury_products')) || [
+            { id: 1, name: 'Royal Gold Watch', cat: 'Watch', price: 3500, img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400' },
+            { id: 2, name: 'Smart Noise-Cancel Pods', cat: 'Gadget', price: 2200, img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400' }
         ];
 
-        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        let orders = JSON.parse(localStorage.getItem('luxury_orders')) || [];
         let selectedProduct = null;
+        let currentFilter = 'All';
+        let isAdminLoggedIn = false;
 
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
-            products.forEach(p => {
+            
+            const filtered = currentFilter === 'All' ? products : products.filter(p => p.cat === currentFilter);
+            
+            if(filtered.length === 0) {
+                grid.innerHTML = `<p style="color:var(--text-muted); grid-column: 1/-1; text-align:center;">No products found in this category.</p>`;
+                return;
+            }
+
+            filtered.forEach(p => {
                 grid.innerHTML += `
                     <div class="card">
                         <img src="${p.img}" alt="${p.name}">
-                        <h3>${p.name}</h3>
-                        <p>${p.price} ৳</p>
-                        <button class="btn" onclick="openBuyModal(${p.id})">Buy Now</button>
-                        ${document.getElementById('adminPanel').style.display === 'block' ? 
-                        `<br><button class="btn btn-danger" onclick="deleteProduct(${p.id})">Delete</button>` : ''}
+                        <div class="card-body">
+                            <h3>${p.name}</h3>
+                            <div class="price">${p.price} ৳</div>
+                            <button class="btn" onclick="openBuyModal(${p.id})">Buy Now</button>
+                            ${isAdminLoggedIn ? `<button class="btn btn-danger" onclick="deleteProduct(${p.id})">Delete Product</button>` : ''}
+                        </div>
                     </div>
                 `;
             });
-            localStorage.setItem('products', JSON.stringify(products));
+            localStorage.setItem('luxury_products', JSON.stringify(products));
+        }
+
+        function filterCategory(cat, btn) {
+            currentFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProducts();
         }
 
         function openBuyModal(id) {
@@ -369,13 +272,13 @@
         }
 
         function submitOrder() {
-            const name = document.getElementById('custName').value;
-            const phone = document.getElementById('custPhone').value;
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
             const method = document.getElementById('payMethod').value;
-            const details = document.getElementById('payDetails').value;
+            const details = document.getElementById('payDetails').value.trim();
 
             if(!name || !phone || !details) {
-                alert('সকল তথ্য সঠিকভাবে পূরণ করুন।');
+                alert('Please fill in all customer and payment details.');
                 return;
             }
 
@@ -387,47 +290,74 @@
             };
 
             orders.push(newOrder);
-            localStorage.setItem('orders', JSON.stringify(orders));
-            alert('আপনার অর্ডার সফলভাবে সম্পন্ন হয়েছে!');
+            localStorage.setItem('luxury_orders', JSON.stringify(orders));
+            alert('Order placed successfully! We will verify your payment soon.');
             closeModal('buyModal');
+            document.getElementById('custName').value = '';
+            document.getElementById('custPhone').value = '';
+            document.getElementById('payDetails').value = '';
             renderOrders();
         }
 
-        function loginAdmin() {
+        function toggleAdminView() {
+            if(isAdminLoggedIn) {
+                isAdminLoggedIn = false;
+                document.getElementById('adminPanel').style.display = 'none';
+                alert('Logged out from Admin Panel.');
+                renderProducts();
+            } else {
+                openModal('adminModal');
+            }
+        }
+
+        function verifyAdmin() {
             const pass = document.getElementById('adminPass').value;
             if(pass === 'admin123') {
+                isAdminLoggedIn = true;
                 document.getElementById('adminPanel').style.display = 'block';
                 closeModal('adminModal');
+                document.getElementById('adminPass').value = '';
                 renderProducts();
                 renderOrders();
-                alert('অ্যাডমিন মোড চালু হয়েছে।');
+                alert('Admin access granted.');
             } else {
-                alert('ভুল পাসওয়ার্ড!');
+                alert('Incorrect password!');
             }
         }
 
         function addProduct() {
-            const name = document.getElementById('pName').value;
-            const price = document.getElementById('pPrice').value;
-            const img = document.getElementById('pImg').value || 'https://via.placeholder.com/150';
+            const name = document.getElementById('pName').value.trim();
+            const cat = document.getElementById('pCat').value;
+            const price = document.getElementById('pPrice').value.trim();
+            const img = document.getElementById('pImg').value.trim() || 'https://via.placeholder.com/400';
 
-            if(name && price) {
-                products.push({ id: Date.now(), name, price, img });
-                renderProducts();
-                document.getElementById('pName').value = '';
-                document.getElementById('pPrice').value = '';
-                document.getElementById('pImg').value = '';
+            if(!name || !price) {
+                alert('Please provide product name and price.');
+                return;
             }
+
+            products.push({ id: Date.now(), name, cat, price: Number(price), img });
+            renderProducts();
+            document.getElementById('pName').value = '';
+            document.getElementById('pPrice').value = '';
+            document.getElementById('pImg').value = '';
+            alert('Product uploaded successfully!');
         }
 
         function deleteProduct(id) {
-            products = products.filter(p => p.id !== id);
-            renderProducts();
+            if(confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id !== id);
+                renderProducts();
+            }
         }
 
         function renderOrders() {
             const tbody = document.querySelector('#orderTable tbody');
             tbody.innerHTML = '';
+            if(orders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-muted);">No orders received yet.</td></tr>`;
+                return;
+            }
             orders.forEach(o => {
                 tbody.innerHTML += `
                     <tr>
@@ -436,7 +366,7 @@
                         <td>${o.method}</td>
                         <td>${o.details}</td>
                         <td>${o.product}</td>
-                        <td>${o.status}</td>
+                        <td style="color:var(--accent); font-weight:bold;">${o.status}</td>
                     </tr>
                 `;
             });
@@ -453,13 +383,20 @@
         function sendChat() {
             const inp = document.getElementById('chatInp');
             const msgs = document.getElementById('chatMsgs');
-            if(inp.value.trim()) {
-                msgs.innerHTML += `<div class="msg user">${inp.value}</div>`;
-                const userTxt = inp.value.toLowerCase();
+            const text = inp.value.trim();
+            if(text) {
+                msgs.innerHTML += `<div class="msg user">${text}</div>`;
                 inp.value = '';
+                msgs.scrollTop = msgs.scrollHeight;
+
                 setTimeout(() => {
-                    let reply = "ধন্যবাদ মেসেজের জন্য। আমাদের প্রতিনিধি দ্রুত যোগাযোগ করবে।";
-                    if(userTxt.includes("bkash") || userTxt.includes("পেমেন্ট")) reply = "আপনি বিকাশ, রকেট বা নগদের মাধ্যমে পেমেন্ট করতে পারবেন।";
+                    let reply = "Thank you for reaching out! Our team will contact you shortly.";
+                    const lower = text.toLowerCase();
+                    if(lower.includes('bKash') || lower.includes('payment') || lower.includes('বিকাশ')) {
+                        reply = "You can easily pay via bKash, Nagad, or Rocket during checkout by providing your TrxID.";
+                    } else if(lower.includes('delivery') || lower.includes('ডেলিভারি')) {
+                        reply = "We deliver all over Bangladesh within 2-3 business days.";
+                    }
                     msgs.innerHTML += `<div class="msg bot">${reply}</div>`;
                     msgs.scrollTop = msgs.scrollHeight;
                 }, 1000);
