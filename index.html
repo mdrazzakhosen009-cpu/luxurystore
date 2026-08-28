@@ -144,6 +144,7 @@
     <nav>
       <button onclick="renderProducts()">SHOP</button>
       <button onclick="openAdminModal()">ADMIN</button>
+      <button onclick="clearAndResetData()" style="color: #ff5555;">RESET DATA</button>
     </nav>
   </header>
 
@@ -166,15 +167,15 @@
 
   <script>
     const defaultProducts = [
-      { id: 1, title: "Royal Diamond Watch", price: 499, img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500" },
-      { id: 2, title: "Luxury Leather Bag", price: 299, img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" },
-      { id: 3, title: "Gold Chronograph", price: 650, img: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500" }
+      { id: 1, name: "Royal Diamond Watch", price: 499, image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500" },
+      { id: 2, name: "Luxury Leather Bag", price: 299, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500" },
+      { id: 3, name: "Gold Chronograph", price: 650, image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500" }
     ];
 
     function getProducts() {
-      const stored = localStorage.getItem('luxora_products');
-      if (!stored || JSON.parse(stored).length === 0) {
-        localStorage.setItem('luxora_products', JSON.stringify(defaultProducts));
+      const stored = localStorage.getItem('luxora_products_v2');
+      if (!stored) {
+        localStorage.setItem('luxora_products_v2', JSON.stringify(defaultProducts));
         return defaultProducts;
       }
       return JSON.parse(stored);
@@ -185,12 +186,16 @@
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       products.forEach(p => {
+        const title = p.name || p.title || 'Exclusive Product';
+        const img = p.image || p.img || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500';
+        const price = p.price || 0;
+
         grid.innerHTML += `
           <div class="product-card">
-            <img src="${p.img}" class="product-img" alt="${p.title}">
+            <img src="${img}" class="product-img" alt="${title}">
             <div>
-              <div class="product-title">${p.title}</div>
-              <div class="product-price">$${p.price}</div>
+              <div class="product-title">${title}</div>
+              <div class="product-price">$${price}</div>
             </div>
             <button class="btn">Order Now</button>
           </div>
@@ -202,18 +207,25 @@
     function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
 
     function addNewProduct() {
-      const title = document.getElementById('pTitle').value;
+      const name = document.getElementById('pTitle').value;
       const price = document.getElementById('pPrice').value;
-      const img = document.getElementById('pImg').value || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500';
+      const image = document.getElementById('pImg').value || 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500';
 
-      if(!title || !price) { alert('Please enter title and price'); return; }
+      if(!name || !price) { alert('Please enter title and price'); return; }
 
       const products = getProducts();
-      products.push({ id: Date.now(), title, price: Number(price), img });
-      localStorage.setItem('luxora_products', JSON.stringify(products));
+      products.push({ id: Date.now(), name, price: Number(price), image });
+      localStorage.setItem('luxora_products_v2', JSON.stringify(products));
       
       closeAdminModal();
       renderProducts();
+    }
+
+    function clearAndResetData() {
+      localStorage.clear();
+      localStorage.setItem('luxora_products_v2', JSON.stringify(defaultProducts));
+      renderProducts();
+      alert('Product data reset successfully!');
     }
 
     window.onload = renderProducts;
